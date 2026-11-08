@@ -31,4 +31,5 @@ CourseResult bestResult(CourseResult previous, RunOutcome outcome) =>
       stars: max(previous.stars, starsFor(outcome).count),
       bestBolts: max(previous.bestBolts, outcome.boltsCollected),
       completed: previous.completed || outcome.finished,
+      foundGear: previous.foundGear || (outcome.finished && outcome.foundGear),
     );

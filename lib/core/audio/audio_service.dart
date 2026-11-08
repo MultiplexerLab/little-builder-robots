@@ -106,6 +106,17 @@ class AudioService {
     unawaited(player.play(AssetSource(path)));
   }
 
+  /// The robot's short exclamations ("Wheee!"). They use a sound effect
+  /// player so they never cut off a hint, and follow the voice switch.
+  void say(String key) {
+    if (_silent || !_settings.voice) return;
+    final path = 'audio/voice/en_GB/$key.m4a';
+    if (!_has(path)) return;
+    if (_sfx.length < 4) _sfx.add(AudioPlayer());
+    final player = _sfx[_nextSfx++ % _sfx.length];
+    unawaited(player.play(AssetSource(path)));
+  }
+
   /// Plays the voice clip for an l10n [key] (AUD-02), ducking the music
   /// while it speaks (AUD-04).
   Future<void> voice(String key) async {

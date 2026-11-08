@@ -19,6 +19,7 @@ class CourseNode extends StatelessWidget {
     required this.state,
     required this.onTap,
     this.robot,
+    this.gear,
     super.key,
   });
 
@@ -32,6 +33,9 @@ class CourseNode extends StatelessWidget {
 
   /// Shown on the next node.
   final RobotConfig? robot;
+
+  /// The golden gear: found (true), still hidden (false), or not shown.
+  final bool? gear;
 
   @override
   Widget build(BuildContext context) {
@@ -80,6 +84,12 @@ class CourseNode extends StatelessWidget {
                         ),
                     ],
                   ),
+                ),
+              if (gear != null)
+                Positioned(
+                  right: 2,
+                  top: 2,
+                  child: GearBadge(found: gear!, size: 26),
                 ),
               if (robot != null)
                 // Beside the node, so it never covers the course before.

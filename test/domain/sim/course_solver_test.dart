@@ -61,7 +61,7 @@ void main() {
         }
       });
 
-      test('intended builds earn 3 stars in 20 to 40 s (SRS 4.5)', () {
+      test('intended builds earn 3 stars in 15 to 25 s (SRS 4.5)', () {
         for (final intended in course.intendedBuilds) {
           final plan = solver.expand(intended);
           for (final style in PlayStyle.values) {
@@ -75,8 +75,19 @@ void main() {
           final seconds = solver.run(course, plan, PlayStyle.big).seconds;
           expect(
             seconds,
-            inInclusiveRange(20, 40),
+            inInclusiveRange(15, 25),
             reason: describe(plan),
+          );
+        }
+      });
+
+      test('its golden gear can be found with some parts (RUN-16)', () {
+        expect(course.gear, isNotNull);
+        for (final style in PlayStyle.values) {
+          expect(
+            solver.gearBuild(course, style),
+            isNotNull,
+            reason: 'nothing reaches the gear (${style.name})',
           );
         }
       });

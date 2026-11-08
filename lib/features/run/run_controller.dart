@@ -20,12 +20,17 @@ class HintState {
     required this.need,
     this.suggestion,
     this.suggestionOwned = true,
+    this.timing = false,
   });
 
   final int obstacleIndex;
 
   /// 1 shrug, 2 voiced hint, 3 "Try new parts?" bubble.
   final int step;
+
+  /// The parts can pass; the jump or flight just needs better timing, so
+  /// the hint is about timing, not new parts.
+  final bool timing;
   final ObstacleNeed need;
   final Part? suggestion;
   final bool suggestionOwned;
@@ -89,6 +94,7 @@ class RunController extends ChangeNotifier {
   double _previewLeft = 0;
   double _shrugLeft = 0;
   final Map<int, int> _failures = {};
+  final Map<(int, RobotConfig), bool> _passable = {};
   HintState? _hint;
   final List<RunEvent> _events = [];
   int _laps = 0;
@@ -177,20 +183,38 @@ class RunController extends ChangeNotifier {
     onEvent?.call(event);
   }
 
-  /// RUN-13: shrug, then a voiced hint, then the "Try new parts?" bubble.
-  /// Little Builder skips the shrug.
+  /// RUN-13, made quicker: the simulator checks whether the robot's parts
+  /// can pass the obstacle at all.
+  ///
+  /// - They can't: the robot shrugs once, then offers new parts (the wrench
+  ///   bubble). Little Builder gets the wrench straight away. Retrying the
+  ///   same build would only fail again.
+  /// - They can (a mistimed jump or flight): the robot shrugs, then gives a
+  ///   voiced timing tip, and never pushes new parts.
   void _climbLadder(int obstacleIndex) {
     final failures = (_failures[obstacleIndex] ?? 0) + 1;
     _failures[obstacleIndex] = failures;
-    final step = min(3, failures + (playStyle == PlayStyle.little ? 1 : 0));
     final need = coach.needFor(course, obstacleIndex);
+    final little = playStyle == PlayStyle.little;
+    final passable = _passable.putIfAbsent(
+      (obstacleIndex, _robot),
+      () => coach.canPass(course, obstacleIndex, _robot),
+    );
+    final step = passable
+        ? (little || failures >= 2 ? 2 : 1)
+        : (little || failures >= 2 ? 3 : 1);
     if (step == 1) {
       _shrugLeft = shrugSeconds;
       _hint = HintState(obstacleIndex: obstacleIndex, step: 1, need: need);
       return;
     }
     if (step == 2) {
-      _hint = HintState(obstacleIndex: obstacleIndex, step: 2, need: need);
+      _hint = HintState(
+        obstacleIndex: obstacleIndex,
+        step: 2,
+        need: need,
+        timing: true,
+      );
       return;
     }
     final suggestion = coach.suggestPart(

@@ -4,15 +4,48 @@
   "index": 1,
   "hintKey": "hintCourse1",
   "rewardBolts": 5,
-  "lengthPx": 6000,
-  "checkpoints": [{ "x": 0 }, { "x": 3000 }],
-  "bolts": [
-    { "x": 800, "y": 24 },
-    { "x": 1800, "y": 24 },
-    { "x": 2800, "y": 24 },
-    { "x": 3800, "y": 24 },
-    { "x": 4800, "y": 24 }
+  "lengthPx": 4600,
+  "checkpoints": [
+    {
+      "x": 0
+    },
+    {
+      "x": 2300
+    }
   ],
+  "bolts": [
+    {
+      "x": 700,
+      "y": 24
+    },
+    {
+      "x": 1400,
+      "y": 24
+    },
+    {
+      "x": 3800,
+      "y": 24
+    },
+    {
+      "x": 3950,
+      "y": 24
+    },
+    {
+      "x": 4100,
+      "y": 24
+    }
+  ],
+  "gear": {
+    "x": 2600,
+    "y": 200
+  },
   "obstacles": [],
-  "intendedBuilds": [{}, { "parts": ["moves_legs"] }]
+  "intendedBuilds": [
+    {},
+    {
+      "parts": [
+        "moves_legs"
+      ]
+    }
+  ]
 }

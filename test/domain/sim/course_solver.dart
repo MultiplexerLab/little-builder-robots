@@ -90,6 +90,37 @@ class CourseSolver {
     return false;
   }
 
+  /// A build that finishes the stretch holding the golden gear and picks
+  /// the gear up (RUN-16), from any parts in the game. Null if none can.
+  RobotConfig? gearBuild(Course course, PlayStyle style) {
+    final gear = course.gear;
+    if (gear == null) return null;
+    final starts = segmentStarts(course);
+    final start = starts.lastWhere(
+      (s) => course.checkpoints[s].x <= gear.x,
+      orElse: () => 0,
+    );
+    final everything = {for (final p in catalog.parts) p.id};
+    for (final build in buildsFrom(everything)) {
+      final sim = RunSimulator(
+        course: course,
+        stats: _calculator.statsFor(build),
+        tuning: tuning,
+        playStyle: style,
+        autopilot: true,
+        startCheckpoint: start,
+      );
+      for (var i = 0; i < 60 * tuning.stepsPerSecond; i++) {
+        sim.step();
+        if (sim.phase == RunPhase.finished || sim.phase == RunPhase.parked) {
+          if (sim.state.gotGear) return build;
+          break;
+        }
+      }
+    }
+    return null;
+  }
+
   /// Every build of [owned] parts with one distinct set of stats. Heads are
   /// style only, so the default head is kept.
   List<RobotConfig> buildsFrom(Set<String> owned) {

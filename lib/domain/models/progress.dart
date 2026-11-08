@@ -12,6 +12,9 @@ abstract class CourseResult with _$CourseResult {
     @Default(0) int bestBolts,
     @Default(false) bool completed,
     @Default(false) bool rewardClaimed,
+
+    /// The golden gear has been found on this course (RUN-16).
+    @Default(false) bool foundGear,
   }) = _CourseResult;
 
   factory CourseResult.fromJson(Map<String, dynamic> json) =>

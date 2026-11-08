@@ -59,6 +59,9 @@ abstract class RunState with _$RunState {
 
     /// Tutorial: stopped before the first gap until the child taps (ONB-02).
     required bool waitingForTap,
+
+    /// The golden gear has been picked up this run (RUN-16).
+    required bool gotGear,
   }) = _RunState;
 }
 
@@ -80,6 +83,7 @@ sealed class RunEvent with _$RunEvent {
   const factory RunEvent.rampLaunch(int obstacleIndex) = RampLaunchEvent;
   const factory RunEvent.jetpackOn() = JetpackOnEvent;
   const factory RunEvent.ceilingBonk() = CeilingBonkEvent;
+  const factory RunEvent.gearFound() = GearFoundEvent;
 
   /// [obstacleIndex] is the obstacle the failure counts against for the hint
   /// ladder (RUN-13), when there is one.

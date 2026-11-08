@@ -16,6 +16,7 @@ import 'package:little_builder_robots/core/widgets/kid_widgets.dart';
 import 'package:little_builder_robots/domain/models/course.dart';
 import 'package:little_builder_robots/domain/rules/obstacle_needs.dart';
 import 'package:little_builder_robots/features/course_map/course_node.dart';
+import 'package:little_builder_robots/features/run/run_screen.dart';
 
 /// The Course map (MAP-01 to MAP-08): World 1 as one winding path of 15
 /// nodes that fits the screen, so no scrolling is needed (NFR-19).
@@ -45,7 +46,9 @@ class _CourseMapScreenState extends ConsumerState<CourseMapScreen> {
     ref.read(selectedCourseProvider.notifier).select(course.id);
     setState(() => _picked = course);
     // MAP-04: a voiced hint about the course's main obstacle.
-    unawaited(audio.voice(course.hintKey));
+    unawaited(
+      audio.voice(courseHintKey(course, ref.read(settingsProvider).playStyle)),
+    );
   }
 
   @override
@@ -103,6 +106,13 @@ class _CourseMapScreenState extends ConsumerState<CourseMapScreen> {
                   child: CourseNode(
                     number: course.index,
                     stars: profile.resultFor(course.id).stars,
+                    // RUN-16: once a course is done, show whether its
+                    // golden gear is still out there.
+                    gear:
+                        course.gear == null ||
+                            !profile.resultFor(course.id).completed
+                        ? null
+                        : profile.resultFor(course.id).foundGear,
                     state: profile.resultFor(course.id).completed
                         ? (course == next && course != courses.last
                               ? NodeState.next
@@ -123,7 +133,17 @@ class _CourseMapScreenState extends ConsumerState<CourseMapScreen> {
                   anchor: points[courses.indexOf(_picked!)],
                   area: Size(box.maxWidth, box.maxHeight),
                   need: coach.mainNeed(_picked!),
-                  text: lookup(l10n, _picked!.hintKey),
+                  text: lookup(
+                    l10n,
+                    courseHintKey(
+                      _picked!,
+                      ref.watch(settingsProvider).playStyle,
+                    ),
+                  ),
+                  voiceKey: courseHintKey(
+                    _picked!,
+                    ref.watch(settingsProvider).playStyle,
+                  ),
                   onGo: () => context.go(AppRoute.workshop.path),
                   onDismiss: () => setState(() => _picked = null),
                 ),
@@ -218,6 +238,7 @@ class _HintBubble extends StatelessWidget {
     required this.area,
     required this.need,
     required this.text,
+    required this.voiceKey,
     required this.onGo,
     required this.onDismiss,
   });
@@ -227,6 +248,7 @@ class _HintBubble extends StatelessWidget {
   final Size area;
   final Need? need;
   final String text;
+  final String voiceKey;
   final VoidCallback onGo;
   final VoidCallback onDismiss;
 
@@ -271,7 +293,7 @@ class _HintBubble extends StatelessWidget {
                 const SizedBox(width: 8),
                 // Side by side, so the bubble stays short enough to fit
                 // under any node.
-                ReplayVoiceButton(voiceKey: course.hintKey),
+                ReplayVoiceButton(voiceKey: voiceKey),
                 const SizedBox(width: 8),
                 ChunkyButton(
                   label: l10n.buttonGo,

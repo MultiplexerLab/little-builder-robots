@@ -166,7 +166,7 @@ void main() {
     final data = await GameDataRepository(rootBundle).loadAll();
     expect(data.catalog.parts, hasLength(17));
     expect(data.courses, hasLength(15));
-    expect(data.stickers, hasLength(24));
+    expect(data.stickers, hasLength(25));
     expect(data.decals, hasLength(8));
     expect(data.testTrack.sections, hasLength(9));
     expect(data.tuning.stepsPerSecond, 120);

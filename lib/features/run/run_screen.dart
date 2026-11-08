@@ -84,12 +84,11 @@ class _RunScreenState extends ConsumerState<RunScreen> {
           _course == _firstCourseWithGap(data.courses),
       loop: widget.testTrack,
     )..addListener(_onChange);
-    _game = RunGame(_controller);
     final audio = ref.read(audioProvider);
     unawaited(
       audio.music(widget.testTrack ? MusicGroup.testTrack : MusicGroup.run),
     );
-    unawaited(audio.voice(_course.hintKey));
+    unawaited(audio.voice(courseHintKey(_course, _style)));
   }
 
   static Course? _firstCourseWithGap(List<Course> courses) {
@@ -104,8 +103,29 @@ class _RunScreenState extends ConsumerState<RunScreen> {
     super.didChangeDependencies();
     if (!_started) {
       _started = true;
-      // NFR-11: no camera pan with Reduce Motion.
-      if (!MediaQuery.disableAnimationsOf(context)) _controller.startPreview();
+      // NFR-11: no camera pan, particles or shake with Reduce Motion.
+      final reduce = MediaQuery.disableAnimationsOf(context);
+      final l10n = AppLocalizations.of(context);
+      _game = RunGame(
+        _controller,
+        reduceMotion: reduce,
+        // The robot's exclamations, each with its voice clip.
+        lines: {
+          'sayWhee': l10n.sayWhee,
+          'sayBoing': l10n.sayBoing,
+          'saySplash': l10n.saySplash,
+          'sayWhoops': l10n.sayWhoops,
+          'sayWhoosh': l10n.sayWhoosh,
+          'saySwing': l10n.saySwing,
+          'sayClunk': l10n.sayClunk,
+          'sayZoom': l10n.sayZoom,
+          'sayHooray': l10n.sayHooray,
+          'sayYum': l10n.sayYum,
+          'sayGear': l10n.sayGear,
+        },
+        onSay: (key) => ref.read(audioProvider).say(key),
+      );
+      if (!reduce) _controller.startPreview();
     }
   }
 
@@ -128,14 +148,21 @@ class _RunScreenState extends ConsumerState<RunScreen> {
       _lastHintObstacle = hint.obstacleIndex;
       if (hint.step == 2) {
         // RUN-13 step 2: a voiced hint naming what is needed.
-        unawaited(audio.voice(needHintKey(hint.need.need)));
+        unawaited(audio.voice(stepTwoHintKey(hint)));
         _spokenHintTimer?.cancel();
         _showSpokenHint = true;
         _spokenHintTimer = Timer(const Duration(seconds: 3), () {
           if (mounted) setState(() => _showSpokenHint = false);
         });
       } else if (hint.step == 3) {
-        unawaited(audio.voice('tryNewParts'));
+        // Big Builder hears the problem; Little Builder the answer.
+        unawaited(
+          audio.voice(
+            _style == PlayStyle.big
+                ? puzzleHintKey(hint.need.need)
+                : needHintKey(hint.need.need),
+          ),
+        );
       }
     } else if (hint == null) {
       _lastHintStep = 0;
@@ -188,9 +215,14 @@ class _RunScreenState extends ConsumerState<RunScreen> {
         audio.sfx(Sfx.jetpack);
       case CeilingBonkEvent():
         audio.sfx(Sfx.boing);
+      case CheckpointReachedEvent():
+        audio.sfx(Sfx.star);
       case ParkedEvent():
         audio.sfx(Sfx.tap);
         unawaited(audio.voice('pitStopHint'));
+      case GearFoundEvent():
+        audio.sfx(Sfx.reveal);
+        haptics.medium();
       case FinishedEvent():
         audio.sfx(Sfx.cheer);
         if (widget.testTrack) {
@@ -395,7 +427,7 @@ class _RunScreenState extends ConsumerState<RunScreen> {
                 child: IgnorePointer(
                   child: _SpokenHint(
                     need: hint.need.need,
-                    text: lookup(l10n, needHintKey(hint.need.need)),
+                    text: lookup(l10n, stepTwoHintKey(hint)),
                   ),
                 ),
               ),
@@ -457,6 +489,20 @@ class _RunScreenState extends ConsumerState<RunScreen> {
 }
 
 /// The voice clip key for a need's hint (RUN-13 step 2).
+/// The puzzle version of a need hint, for Big Builder: it says what the
+/// problem is, not which part fixes it.
+String puzzleHintKey(Need need) => '${needHintKey(need)}Puzzle';
+
+/// A course's map and start hint: the direct version for Little Builder,
+/// the puzzle version for Big Builder (MAP-04).
+String courseHintKey(Course course, PlayStyle style) =>
+    style == PlayStyle.big ? '${course.hintKey}Puzzle' : course.hintKey;
+
+/// RUN-13 step 2 only comes when the parts can pass, so it is a timing
+/// tip: when to jump, or how to fly.
+String stepTwoHintKey(HintState hint) =>
+    hint.need.need == Need.jetpack ? 'hintFlyTiming' : 'hintJumpTiming';
+
 String needHintKey(Need need) {
   final name = need.name;
   return 'hint${name[0].toUpperCase()}${name.substring(1)}';

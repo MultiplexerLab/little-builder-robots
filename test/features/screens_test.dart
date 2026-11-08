@@ -300,4 +300,22 @@ void main() {
       expect(screen.intersect(rect), rect, reason: label);
     }
   });
+
+  testWidgets('the first-run card fits the screen (ONB-01, NFR-19)', (
+    tester,
+  ) async {
+    // A Redmi Note 11S in landscape, minus its camera cut-out.
+    await pumpApp(
+      tester,
+      location: AppRoute.firstRun.path,
+      store: seededStore(settings: const Settings()),
+      size: const Size(820, 393),
+    );
+    await tester.pump(const Duration(milliseconds: 300));
+    final screen = Offset.zero & tester.view.physicalSize / 2;
+    for (final text in ['For grown-ups', 'Little Builder', 'Big Builder']) {
+      final rect = tester.getRect(find.text(text));
+      expect(screen.intersect(rect), rect, reason: text);
+    }
+  });
 }

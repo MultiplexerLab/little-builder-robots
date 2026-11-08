@@ -113,24 +113,7 @@ class ObstacleCoach {
     RobotConfig robot,
     Set<String> owned,
   ) {
-    final probe = _probeCourse(course, index);
-    bool passes(RobotConfig build) {
-      final sim = RunSimulator(
-        course: probe,
-        stats: _calculator.statsFor(build),
-        tuning: tuning,
-        autopilot: true,
-      );
-      final limit = 20 * tuning.stepsPerSecond;
-      for (var i = 0; i < limit; i++) {
-        sim.step();
-        if (sim.phase == RunPhase.finished) return true;
-        if (sim.phase == RunPhase.bumped || sim.phase == RunPhase.fallen) {
-          return false;
-        }
-      }
-      return false;
-    }
+    bool passes(RobotConfig build) => canPass(course, index, build);
 
     const slots = [Slot.moves, Slot.body, Slot.arms];
     for (final wantOwned in [true, false]) {
@@ -145,6 +128,27 @@ class ObstacleCoach {
       }
     }
     return null;
+  }
+
+  /// Whether [robot] can get past obstacle [index] with perfect play, tried
+  /// in the headless simulator. If not, retrying is pointless and the hint
+  /// ladder offers new parts sooner (RUN-13).
+  bool canPass(Course course, int index, RobotConfig robot) {
+    final sim = RunSimulator(
+      course: _probeCourse(course, index),
+      stats: _calculator.statsFor(robot),
+      tuning: tuning,
+      autopilot: true,
+    );
+    final limit = 20 * tuning.stepsPerSecond;
+    for (var i = 0; i < limit; i++) {
+      sim.step();
+      if (sim.phase == RunPhase.finished) return true;
+      if (sim.phase == RunPhase.bumped || sim.phase == RunPhase.fallen) {
+        return false;
+      }
+    }
+    return false;
   }
 
   /// A short course holding obstacle [index] and anything overlapping it

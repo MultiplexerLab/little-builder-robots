@@ -8,7 +8,17 @@ Revision 3 merges the review of the 15 UI mockups into the requirements. It adds
 
 ## 0. Changes
 
-### 0.1 Revision 3 (mockup review)
+### 0.1 Revision 4 (gameplay review)
+
+| Area | Change |
+|---|---|
+| Hints | RUN-13: the simulator checks whether the robot's parts can pass the obstacle. If not, the robot shrugs once and then offers new parts (Little Builder gets the wrench at once). If they can, the child gets a timing tip instead, never a push for new parts |
+| Puzzle | MAP-04 and RUN-13: Big Builder hears hints that describe the problem ("Those steps are too tall for this robot!"); Little Builder keeps hints that name the answer |
+| Courses | Section 4.5: every course is rebuilt as teach, twist, payoff, and takes 15 to 25 s with the intended build (was 20 to 40). Bolt counts and rewards are unchanged |
+| Replay | New RUN-16: one golden gear per course, often out of reach of the intended build, so children come back with new parts. Gears do not change stars. STK-01 gains a 25th sticker for the first gear |
+| Personality | The robot shows off each part in the Workshop, shouts short voiced exclamations in runs, and does tricks on Home (FEEL) |
+
+### 0.2 Revision 3 (mockup review)
 
 | Area | Change |
 |---|---|
@@ -31,7 +41,7 @@ Revision 3 merges the review of the 15 UI mockups into the requirements. It adds
 | Workshop (build step 6) | Paint (WRK-06) and decals (WRK-10) are two extra tabs after the four slot tabs. Tabs sit in the top bar so two rows of 96 pt tiles fit a landscape iPhone without scrolling |
 | Content (build step 12) | Obstacles added to the model: barGap, heavySwitch, mud, leafPile, lowCeiling and ramp; Jetpack thrust and the autopilot used by Helper mode and the solver test. Test Track sections live in test_track.json; the 24 stickers in stickers.json |
 
-### 0.2 Revision 2 (changes from revision 1)
+### 0.3 Revision 2 (changes from revision 1)
 
 | Area | Change |
 |---|---|
@@ -210,7 +220,7 @@ Every screen traces back to requirements. Requirements with no screen (SAV, AUD,
 | MAP-01 | The map shows World 1 (Gear Garden) as a path of 15 course nodes | Must |
 | MAP-02 | Each node (min 64 pt; the next node 96 pt) shows its state with shape as well as colour: done (with 1 to 3 stars, filled or outlined), next (highlighted, bouncing robot marker), or locked (dashed border and padlock) | Must |
 | MAP-03 | A course unlocks when the one before it is finished with at least 1 star | Must |
-| MAP-04 | Tapping a playable node opens the Workshop with that course selected and plays a voiced hint about its main obstacle, with its stat icon | Must |
+| MAP-04 | Tapping a playable node plays a voiced hint about its main obstacle, with its stat icon, in a bubble with a Go button that opens the Workshop with that course selected. For Big Builder the hint describes the problem ("Steps ahead, and they get taller!"); for Little Builder it names the answer ("Steps ahead! Legs are good at climbing.") | Must |
 | MAP-05 | A star counter shows stars earned out of the world total (45) | Must |
 | MAP-07 | Nothing on the map refers to purchases or unavailable content in v1.0: no World 2 chip, locked world button, teaser or price | Must |
 | MAP-08 | The path reads as one line from course 1 to course 15 with no arrows that point against the direction of travel; the voiced hint bubble for a node has a 64 pt replay button | Must |
@@ -231,9 +241,10 @@ Every screen traces back to requirements. Requirements with no screen (SAV, AUD,
 | RUN-10 | Runs keep 60 fps on iPhone 11 and newer and iPad 9th gen and newer | Must |
 | RUN-11 | Pit stops: checkpoints marked as pit stops in course data have a garage pad. The robot parks on it and a panel opens showing the robot, the stat icon of the next obstacle, and the four slots with owned parts only. Tapping a part equips it; a large Go button continues the run. Parts swapped at a pit stop do not change the saved RobotConfig | Must |
 | RUN-12 | Every obstacle shows the icon of the stat or ability it needs, with the required pips (for example, steps show the Climb icon with 2 pips). The icon pulses when the robot approaches | Must |
-| RUN-13 | Hint ladder, counted per obstacle per run: failure 1, the robot shrugs and looks at the obstacle; failure 2, a voiced hint names what is needed ("These steps are tall! Try legs that climb."); failure 3, a "Try new parts?" bubble with a wrench button that opens the nearest pit stop if one is behind the robot, otherwise the Workshop (WRK-12). Little Builder skips step 1. The bubble never blocks play: it is anchored next to the robot, covers no more than a third of the screen, does not dim the course, and tapping elsewhere dismisses it. Its only button is the wrench (primary, 96 pt); it shows the current part and the suggested part as pictures with an arrow between them. No lives, tries or failure counters are shown anywhere | Must |
+| RUN-13 | Hint ladder, counted per obstacle per run: the headless simulator first checks whether the robot's current parts can pass the obstacle. If they cannot: failure 1, the robot shrugs and looks at the obstacle; failure 2, a "Try new parts?" bubble with a wrench button that opens the nearest pit stop if one is behind the robot, otherwise the Workshop (WRK-12), with a voiced hint (Big Builder: the problem, "Those steps are too tall for this robot!"; Little Builder: the answer, "These steps are tall! Try legs that climb."). Little Builder gets the bubble at failure 1. If the parts can pass (a mistimed jump or flight): failure 1, the shrug; from failure 2, a voiced timing tip ("Tap jump right at the edge!"), and never the new-parts bubble. The bubble never blocks play: it is anchored next to the robot, covers no more than a third of the screen, does not dim the course, and tapping elsewhere dismisses it. Its only button is the wrench (primary, 96 pt); it shows the current part and the suggested part as pictures with an arrow between them. No lives, tries or failure counters are shown anywhere | Must |
 | RUN-14 | Before each run the camera pans slowly across the course (max 4 s) and the robot points at the main obstacle while its hint plays. Tapping skips it. Replays of a finished course skip it automatically | Should |
 | RUN-15 | The jump zone is the whole right 40% of the screen below the HUD, with a large jump icon (min 120 pt) as a visual cue. Taps anywhere in the zone count | Must |
+| RUN-16 | Each course hides one golden gear, picked up on contact like a bolt. Many are out of reach of the intended build (high up for Spring feet or the Jetpack, or needing two parts together), so finishing with new parts later is rewarded. A found gear is kept once the course is finished, shown on its map node (an outline until found, a gold gear after) and on Result, and never changes stars. Helper mode's autopilot reaches for a gear only when the jump lands on clear, flat ground, so it can never cause a failure. The solver test checks every gear can be reached by some build | Should |
 
 ### 3.6 Helper mode (HLP)
 
@@ -271,7 +282,7 @@ Helper mode is on for Little Builder and off for Big Builder.
 
 | ID | Requirement | Priority |
 |---|---|---|
-| STK-01 | A sticker book holds 24 stickers for discoveries, not skill (for example: first jump, first splash, sank in mud, first Jetpack flight, pressed a heavy switch, tried every Moves part, painted the robot, finished Test Track lap, 3 stars on any course, finished World 1). The full list lives in `stickers.json` | Should |
+| STK-01 | A sticker book holds 25 stickers for discoveries, not skill (for example: first jump, first splash, sank in mud, first Jetpack flight, pressed a heavy switch, tried every Moves part, painted the robot, finished Test Track lap, 3 stars on any course, found a golden gear, finished World 1). The full list lives in `stickers.json` | Should |
 | STK-02 | Earning a sticker shows a short reveal at the next Result screen or Workshop visit, never mid-run | Should |
 | STK-03 | Unearned stickers show as silhouettes; tapping one plays a voiced clue about how to get it | Should |
 | STK-04 | Stickers are never awarded for time spent or days played (no streaks) | Must |
@@ -421,25 +432,25 @@ Resulting stats for common builds (Light frame, Short arms):
 
 ### 4.5 Course list, World 1 (Gear Garden)
 
-One new idea per course; later courses combine two. Each course takes 20 to 40 seconds with the intended build. Bolts are placed so all can be collected with the intended build.
+One new idea per course; later courses combine two. Every course follows teach, twist, payoff: an easy first obstacle, a harder version, then a reward moment (bolt arcs over gaps, a ramp, a cluster of bolts). Each course takes 15 to 25 seconds with the intended build in Big Builder. Bolts are placed so all can be collected with the intended build. The last column says which parts reach the golden gear (RUN-16); a gear the intended build can reach is a first discovery, the rest reward coming back. The course files are generated by `tool/courses/make_courses.py`.
 
-| # | Main obstacle | Intended build | Pit stop | Bolts on course | Reward |
-|---|---|---|---|---|---|
-| 1 | Flat ground, bolts (tutorial) | Any | No | 5 | 5 bolts |
-| 2 | Low steps | Legs | No | 6 | 5 bolts |
-| 3 | Small gaps | Any + jump | No | 6 | Spring feet |
-| 4 | Steps then timed gate | Legs, swap to Wheels at the pit stop | Yes, between | 7 | 8 bolts |
-| 5 | Bigger gaps | Spring feet | No | 8 | 8 bolts |
-| 6 | Ramp jump over a wide gap | Wheels (speed off the ramp) | No | 8 | Jetpack |
-| 7 | Wide gaps, low ceiling | Jetpack with fuel control | No | 9 | 10 bolts |
-| 8 | Steps + gaps | Legs or Tank tracks; or Legs then Spring feet at the pit stop | Yes | 9 | 10 bolts |
-| 9 | Mud | Light frame | No | 9 | Heavy frame |
-| 10 | Heavy switch opens door | Heavy frame | No | 10 | 12 bolts |
-| 11 | Switch then mud | Heavy frame, swap to Light frame at the pit stop; or Heavy frame + Tank tracks | Yes, between | 10 | Grabber arms |
-| 12 | Bar swings | Grabber arms | No | 10 | 12 bolts |
-| 13 | Leaf piles | Fan arms, or Jetpack over them | No | 11 | 15 bolts |
-| 14 | Mixed: steps, gap, switch | Player's choice | Yes, 2 | 12 | 15 bolts |
-| 15 | Finale, all obstacle types | Player's choice | Yes, 3 | 12 | Gold head + celebration parade |
+| # | Teach, twist, payoff | Intended build | Pit stop | Bolts on course | Reward | Golden gear |
+|---|---|---|---|---|---|---|
+| 1 | Flat ground, bolts (tutorial) | Any | No | 5 | 5 bolts | Spring feet |
+| 2 | One step, two steps, a tall staircase | Legs | No | 6 | 5 bolts | Legs (on top) |
+| 3 | A gap, a double gap, a splash gap | Any + jump | No | 6 | Spring feet | Spring feet |
+| 4 | Steps, then two timed gates | Legs, swap to Wheels at the pit stop | Yes, between | 7 | 8 bolts | Spring feet |
+| 5 | A big gap, then three bigger ones with bolt arcs | Spring feet | No | 8 | 8 bolts | Jetpack |
+| 6 | A hop, then two ramp jumps | Wheels (speed off the ramp) | No | 8 | Jetpack | Jetpack |
+| 7 | Wide gaps, one under a low roof | Jetpack with fuel control | No | 9 | 10 bolts | Jetpack |
+| 8 | Steps and a hop, then longer gaps | Legs; or Legs then Spring feet at the pit stop | Yes | 9 | 10 bolts | Spring feet |
+| 9 | Mud, then mud with gaps | Light frame | No | 9 | Heavy frame | Spring feet |
+| 10 | Heavy switches, with a hop between | Heavy frame | No | 10 | 12 bolts | Spring feet + Heavy frame |
+| 11 | Switches, then mud | Heavy frame, swap to Light frame at the pit stop | Yes, between | 10 | Grabber arms | Spring feet |
+| 12 | One bar, two bars, a hop | Grabber arms | No | 10 | 12 bolts | Spring feet + Grabber arms |
+| 13 | Leaf piles, a double pile, a gap | Jetpack, or Fan arms | No | 11 | 15 bolts | Jetpack, or Spring feet + Fan arms |
+| 14 | Steps, gaps, switches | Legs, then Spring feet, then Heavy frame | Yes, 2 | 12 | 15 bolts | Spring feet + Heavy frame |
+| 15 | Finale, all obstacle types | Legs, Wheels, Jetpack, then Wheels + Heavy frame + Grabber arms | Yes, 3 | 12 | Gold head + celebration parade | Spring feet + Heavy frame + Grabber arms |
 
 ### 4.6 Bolt economy
 
@@ -590,14 +601,15 @@ Obstacle    steps { x, stepWidth, stepHeights[], topWidth }    // one shape per 
             | gap { x, width } | timedGate { plateX, x, openSeconds } | ... (more in build step 12)
 Course      { id, world, index, lengthPx, obstacles[], bolts[ { x, y } ],
               checkpoints[ { x, pitStop } ], hintKey, rewardPartId?, rewardBolts,
-              intendedBuilds[ { parts[], pitStops[ parts[] ] } ] } // intendedBuilds used by the solver test
+              intendedBuilds[ { parts[], pitStops[ parts[] ] } ],  // intendedBuilds used by the solver test
+              gear? { x, y } }                                     // RUN-16 golden gear
 SimTuning   physics.json: speed, climb, jump, fuel and gravity constants, Helper time scale,
             respawn delays, robot size, jump buffer
 Sticker     { id, iconAsset, clueKey, rule }
 Decal       { id, spriteAsset, cost }
 Progress    { schemaVersion, activeProfile, profiles[ ProfileData ] }
 ProfileData { robot: RobotConfig, unlockedPartIds[], unlockedDecalIds[], bolts,
-              courseResults { courseId: { stars, bestBolts, completed, rewardClaimed } },
+              courseResults { courseId: { stars, bestBolts, completed, rewardClaimed, foundGear } },
               stickerIds[], partsTried[], playSecondsByDay {} }
 Settings    { playStyle (little|big), music, sfx, voice, haptics, dailyLimitMinutes,
               onboardingDone }

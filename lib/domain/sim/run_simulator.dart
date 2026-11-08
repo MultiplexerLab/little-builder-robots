@@ -78,6 +78,7 @@ class RunSimulator {
   bool _wasOnBar = false;
   bool _tutorialDone = false;
   bool _waiting = false;
+  bool _gotGear = false;
 
   bool get _helper => playStyle == PlayStyle.little;
 
@@ -117,6 +118,7 @@ class RunSimulator {
     thrusting: _thrusting,
     onBar: _onGround && _grab && terrain.onBar(_left, _right),
     waitingForTap: _waiting,
+    gotGear: _gotGear,
   );
 
   RunOutcome get outcome => RunOutcome(
@@ -124,6 +126,7 @@ class RunSimulator {
     boltsCollected: _collected.length,
     boltsOnCourse: course.bolts.length,
     falls: _falls,
+    foundGear: _gotGear,
   );
 
   /// A press starts a jump on the next step; holding keeps the Jetpack on
@@ -287,6 +290,10 @@ class RunSimulator {
     if (edge != null && (wall == null || edge.x <= wall)) {
       if (_onGround && edge.height - _y <= _climbPx + _epsilon) {
         _y = edge.height; // SRS 4.1: climb a step no taller than Climb allows
+        // Make sure the body is over the step it just climbed: a front
+        // landing exactly on the edge would otherwise not count as on it,
+        // and the robot would fall through.
+        newX = max(newX, edge.x - _halfWidth + 0.01);
       } else if (_support() == null) {
         // Falling in a gap: slide down its far wall.
         newX = edge.x - _halfWidth - _epsilon;
@@ -468,6 +475,16 @@ class RunSimulator {
         events.add(RunEvent.boltCollected(i));
       }
     }
+    // RUN-16: the golden gear is picked up the same way, once.
+    final gear = course.gear;
+    if (gear != null &&
+        !_gotGear &&
+        (gear.x - _x).abs() <= reach &&
+        gear.y >= _y - tuning.boltRadius &&
+        gear.y <= _y + tuning.robotHeight + tuning.boltRadius) {
+      _gotGear = true;
+      events.add(const RunEvent.gearFound());
+    }
   }
 
   void _reachCheckpoints(List<RunEvent> events) {
@@ -547,16 +564,62 @@ class RunSimulator {
         null;
   }
 
+  /// Jump height for the current stats (SRS 4.1).
+  double get _jumpPeak => _jumpVelocity * _jumpVelocity / (2 * tuning.gravity);
+
+  /// Whether a jump from here lands on the same flat, clear ground: nothing
+  /// to bump into, no gap, no ceiling. The autopilot only jumps for a gear
+  /// when this holds, so going for it never causes a failure.
+  bool _clearJump(double distance) {
+    final from = _left;
+    final to = _right + distance + 2 * _halfWidth;
+    if (terrain.hasHole(from, to)) return false;
+    if (terrain.risingEdge(from, to, _y - 1) != null) return false;
+    if ((terrain.supportUnder(to - _halfWidth, to) ?? -1) != _y) return false;
+    if (_ceilingOver(from, to) != null) return false;
+    for (final o in course.obstacles) {
+      if (o.start < to && o.end > from) return false;
+    }
+    return true;
+  }
+
+  /// Autopilot help with the golden gear (RUN-16): a well-timed jump when
+  /// the build can reach it, or a Jetpack climb towards it.
+  ({bool jump, double target}) _seekGear() {
+    final gear = course.gear;
+    if (gear == null || _gotGear || gear.x < _left) {
+      return (jump: false, target: 0);
+    }
+    final dx = gear.x - _x;
+    if (_stats.has(Ability.jetpack)) {
+      final near = dx < tuning.flightLookahead + 120;
+      return (
+        jump: false,
+        target: near ? gear.y - tuning.robotHeight / 2 : 0,
+      );
+    }
+    if (!_onGround) return (jump: false, target: 0);
+    final reachable =
+        _y + _jumpPeak + tuning.robotHeight + tuning.boltRadius >= gear.y;
+    if (!reachable) return (jump: false, target: 0);
+    final airTime = 2 * _jumpVelocity / tuning.gravity;
+    final atPeak = _speed * airTime / 2;
+    final step = _speed * _dt;
+    final now = dx <= atPeak && dx > atPeak - step;
+    return (jump: now && _clearJump(_speed * airTime), target: 0);
+  }
+
   /// What a perfect player does (Helper mode and the solver): jump at the
   /// last moment before a gap; with a Jetpack, hover over gaps, climb over
-  /// leaf piles and stay under ceilings.
+  /// leaf piles and stay under ceilings. Both go for the golden gear.
   ({bool jump, bool hold}) _pilot() {
-    var jump = atGapEdge;
+    final gear = _seekGear();
+    var jump = atGapEdge || gear.jump;
     if (!_stats.has(Ability.jetpack)) return (jump: jump, hold: false);
 
-    var target = 0.0;
-    if (jump || terrain.hasHole(_left, _right, grab: _grab)) {
-      target = tuning.hoverHeight;
+    var target = gear.target;
+    if (atGapEdge || terrain.hasHole(_left, _right, grab: _grab)) {
+      target = max(target, tuning.hoverHeight);
     }
     if (!_stats.has(Ability.fan)) {
       for (final (i, obstacle) in course.obstacles.indexed) {

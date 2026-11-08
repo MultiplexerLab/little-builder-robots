@@ -20,8 +20,8 @@ void main() {
 
   group('STK-01 to STK-04', () {
     test('24 stickers, each with a known rule and clue', () {
-      expect(stickers, hasLength(24));
-      expect(stickers.map((s) => s.id).toSet(), hasLength(24));
+      expect(stickers, hasLength(25));
+      expect(stickers.map((s) => s.id).toSet(), hasLength(25));
       const facts = {
         Fact.jump, Fact.bolt, Fact.splash, Fact.boing, Fact.mud, //
         Fact.jetpack, Fact.heavySwitch, Fact.swing, Fact.leaves, Fact.ramp,
@@ -29,6 +29,7 @@ void main() {
         Fact.testTrackLap, Fact.paint, Fact.decal, Fact.headSwap,
         Fact.newPart, Fact.allMoves, Fact.threeStars, Fact.goldHead,
         Fact.world1,
+        Fact.gear,
       };
       expect(stickers.map((s) => s.rule).toSet(), facts);
     });
@@ -44,9 +45,13 @@ void main() {
     });
 
     test('falling in water is a splash; a dry gap is not', () {
-      final c6 = courses[5]; // gap 3 is water
-      expect(rules.factsFromRun(c6, const [RunEvent.fell(3)]), {Fact.splash});
-      expect(rules.factsFromRun(c6, const [RunEvent.fell(1)]), isEmpty);
+      final c6 = courses[5]; // obstacle 4 is a water gap, 2 is dry
+      expect(rules.factsFromRun(c6, const [RunEvent.fell(4)]), {Fact.splash});
+      expect(rules.factsFromRun(c6, const [RunEvent.fell(2)]), isEmpty);
+      expect(
+        rules.factsFromRun(c6, const [RunEvent.gearFound()]),
+        {Fact.gear},
+      );
     });
 
     test('award adds new stickers once and queues them for reveal', () {

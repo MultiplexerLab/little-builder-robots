@@ -29,6 +29,7 @@ IconData stickerIcon(String rule) => switch (rule) {
   Fact.threeStars => Icons.stars_rounded,
   Fact.goldHead => Icons.emoji_events_rounded,
   Fact.world1 => Icons.flag_rounded,
+  Fact.gear => Icons.settings_rounded,
   _ => Icons.help_rounded,
 };
 

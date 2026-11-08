@@ -45,78 +45,83 @@ class _FirstRunScreenState extends ConsumerState<FirstRunScreen> {
     return ChildScaffold(
       showHome: false,
       body: Center(
-        child: SingleChildScrollView(
+        // Child screens never scroll (NFR-19): on a short screen the card
+        // shrinks so the whole card, heading included, stays in view.
+        child: Padding(
           padding: const EdgeInsets.all(AppSizes.targetSpacing),
-          child: Container(
-            constraints: const BoxConstraints(maxWidth: 720),
-            padding: const EdgeInsets.all(24),
-            decoration: BoxDecoration(
-              color: AppColors.white,
-              borderRadius: BorderRadius.circular(32),
-              border: Border.all(
-                color: AppColors.navy,
-                width: AppSizes.outline,
+          child: FittedBox(
+            fit: BoxFit.scaleDown,
+            child: Container(
+              constraints: const BoxConstraints(maxWidth: 720),
+              padding: const EdgeInsets.all(24),
+              decoration: BoxDecoration(
+                color: AppColors.white,
+                borderRadius: BorderRadius.circular(32),
+                border: Border.all(
+                  color: AppColors.navy,
+                  width: AppSizes.outline,
+                ),
               ),
-            ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Icon(
-                      Icons.family_restroom_rounded,
-                      color: AppColors.navy,
-                      size: 32,
-                    ),
-                    const SizedBox(width: 8),
-                    Text(l10n.firstRunTitle, style: AppText.label),
-                  ],
-                ),
-                const SizedBox(height: 4),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Flexible(
-                      child: Text(
-                        l10n.firstRunQuestion,
-                        style: AppText.title,
-                        textAlign: TextAlign.center,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Icon(
+                        Icons.family_restroom_rounded,
+                        color: AppColors.navy,
+                        size: 32,
                       ),
-                    ),
-                    const SizedBox(width: 12),
-                    const ReplayVoiceButton(voiceKey: 'firstRunQuestion'),
-                  ],
-                ),
-                const SizedBox(height: 16),
-                Wrap(
-                  spacing: 24,
-                  runSpacing: 16,
-                  alignment: WrapAlignment.center,
-                  children: [
-                    _StyleCard(
-                      label: l10n.playStyleLittle,
-                      ages: l10n.playStyleLittleAges,
-                      robotSize: 90,
-                      robot: robot,
-                      onTap: () => _choose(PlayStyle.little),
-                    ),
-                    _StyleCard(
-                      label: l10n.playStyleBig,
-                      ages: l10n.playStyleBigAges,
-                      robotSize: 120,
-                      robot: robot,
-                      onTap: () => _choose(PlayStyle.big),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 12),
-                Text(
-                  l10n.firstRunNote,
-                  style: AppText.label,
-                  textAlign: TextAlign.center,
-                ),
-              ],
+                      const SizedBox(width: 8),
+                      Text(l10n.firstRunTitle, style: AppText.label),
+                    ],
+                  ),
+                  const SizedBox(height: 4),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Flexible(
+                        child: Text(
+                          l10n.firstRunQuestion,
+                          style: AppText.title,
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                      const ReplayVoiceButton(voiceKey: 'firstRunQuestion'),
+                    ],
+                  ),
+                  const SizedBox(height: 16),
+                  Wrap(
+                    spacing: 24,
+                    runSpacing: 16,
+                    alignment: WrapAlignment.center,
+                    children: [
+                      _StyleCard(
+                        label: l10n.playStyleLittle,
+                        ages: l10n.playStyleLittleAges,
+                        robotSize: 90,
+                        robot: robot,
+                        onTap: () => _choose(PlayStyle.little),
+                      ),
+                      _StyleCard(
+                        label: l10n.playStyleBig,
+                        ages: l10n.playStyleBigAges,
+                        robotSize: 120,
+                        robot: robot,
+                        onTap: () => _choose(PlayStyle.big),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 12),
+                  Text(
+                    l10n.firstRunNote,
+                    style: AppText.label,
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              ),
             ),
           ),
         ),

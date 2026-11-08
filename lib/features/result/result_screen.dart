@@ -95,7 +95,7 @@ class _ResultScreenState extends ConsumerState<ResultScreen> {
     ];
     final gained = report.runBolts + report.rewardBolts;
 
-    return ChildScaffold(
+    final scaffold = ChildScaffold(
       topRight: BoltCounter(bolts: profile.bolts),
       body: Center(
         // Child screens never scroll (NFR-19): on a short screen the
@@ -143,6 +143,15 @@ class _ResultScreenState extends ConsumerState<ResultScreen> {
                       ],
                     ),
                     const SizedBox(height: 8),
+                    if (report.outcome.foundGear)
+                      Semantics(
+                        label: l10n.gearFoundLabel,
+                        excludeSemantics: true,
+                        child: const Padding(
+                          padding: EdgeInsets.only(bottom: 6),
+                          child: GearBadge(found: true, size: 44),
+                        ),
+                      ),
                     if (gained > 0)
                       Semantics(
                         label: l10n.boltsGainedLabel(gained),
@@ -197,6 +206,14 @@ class _ResultScreenState extends ConsumerState<ResultScreen> {
           ),
         ),
       ),
+    );
+    // A confetti shower to celebrate the finish (skipped with Reduce
+    // Motion; never blocks a tap).
+    return Stack(
+      children: [
+        scaffold,
+        const Positioned.fill(child: ConfettiShower()),
+      ],
     );
   }
 }

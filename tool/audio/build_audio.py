@@ -21,7 +21,7 @@ TOOL = Path(__file__).resolve().parent
 ASSETS = ROOT / "assets" / "audio"
 
 # ARB keys a child hears (AUD-02). Grown-ups text is never voiced (PAR-10).
-VOICED_PREFIXES = ("goodAt", "hint", "stickerClue", "tutorial")
+VOICED_PREFIXES = ("goodAt", "hint", "say", "stickerClue", "tutorial")
 VOICED_KEYS = {
     "firstRunQuestion", "homeGreeting", "homeIdlePlay", "testTrackLocked",
     "testTrackHint", "needMoreBolts", "partFromCourse", "pitStopHint",

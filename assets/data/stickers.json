@@ -143,6 +143,12 @@
       "iconAsset": "assets/images/stickers/world1.png",
       "clueKey": "stickerClueWorld1",
       "rule": "world1"
+    },
+    {
+      "id": "sticker_gear",
+      "iconAsset": "assets/images/stickers/gear.png",
+      "clueKey": "stickerClueGear",
+      "rule": "gear"
     }
   ]
 }

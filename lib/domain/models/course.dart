@@ -158,6 +158,10 @@ abstract class Course with _$Course {
     @Default(<BoltSpot>[]) List<BoltSpot> bolts,
     @Default(<Obstacle>[]) List<Obstacle> obstacles,
     @Default(<IntendedBuild>[]) List<IntendedBuild> intendedBuilds,
+
+    /// A hidden golden gear, often out of reach of the intended build so
+    /// there is a reason to come back with new parts (RUN-16).
+    BoltSpot? gear,
   }) = _Course;
 
   factory Course.fromJson(Map<String, dynamic> json) => _$CourseFromJson(json);

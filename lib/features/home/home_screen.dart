@@ -11,7 +11,7 @@ import 'package:little_builder_robots/core/audio/audio_service.dart';
 import 'package:little_builder_robots/core/l10n/gen/app_localizations.dart';
 import 'package:little_builder_robots/core/widgets/chunky_button.dart';
 import 'package:little_builder_robots/core/widgets/kid_widgets.dart';
-import 'package:little_builder_robots/core/widgets/robot_painter.dart';
+import 'package:little_builder_robots/core/widgets/robot_show_off.dart';
 import 'package:little_builder_robots/features/parent_gate/parent_gate_screen.dart';
 
 /// Home (HOM-02 to HOM-05).
@@ -27,7 +27,18 @@ class HomeScreen extends ConsumerStatefulWidget {
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
   Timer? _idle;
-  bool _cheer = false;
+  Timer? _tricks;
+  int _tricksPlayed = 0;
+  Trick _trick = Trick.wave;
+
+  /// HOM-05: the tricks the robot does on Home, in turn.
+  static const List<Trick> _homeTricks = [
+    Trick.wave,
+    Trick.hop,
+    Trick.spin,
+    Trick.boing,
+    Trick.march,
+  ];
   bool _hinting = false;
 
   @override
@@ -37,10 +48,21 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     unawaited(audio.music(MusicGroup.menus));
     unawaited(audio.voice('homeGreeting'));
     _restartIdle();
+    // HOM-05: an idle robot shows off now and then.
+    _tricks = Timer.periodic(const Duration(seconds: 6), (_) => _doTrick());
+  }
+
+  void _doTrick() {
+    if (!mounted) return;
+    setState(() {
+      _trick = _homeTricks[_tricksPlayed % _homeTricks.length];
+      _tricksPlayed++;
+    });
   }
 
   @override
   void dispose() {
+    _tricks?.cancel();
     _idle?.cancel();
     super.dispose();
   }
@@ -58,10 +80,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     _restartIdle();
     ref.read(audioProvider).sfx(Sfx.honk);
     ref.read(hapticsProvider).light();
-    setState(() => _cheer = true);
-    Timer(const Duration(milliseconds: 700), () {
-      if (mounted) setState(() => _cheer = false);
-    });
+    _doTrick();
   }
 
   void _play() {
@@ -219,13 +238,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                               label: l10n.robotLabel,
                               child: GestureDetector(
                                 onTap: _tapRobot,
-                                child: RobotView(
+                                child: RobotShowOff(
                                   config: profile.robot,
                                   size: robotSize,
-                                  face: _cheer
-                                      ? RobotFace.cheer
-                                      : RobotFace.happy,
-                                  armsUp: _cheer,
+                                  trick: _trick,
+                                  play: _tricksPlayed,
                                 ),
                               ),
                             ),

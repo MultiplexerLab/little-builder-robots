@@ -13,6 +13,7 @@ import 'package:little_builder_robots/core/l10n/l10n_lookup.dart';
 import 'package:little_builder_robots/core/widgets/chunky_button.dart';
 import 'package:little_builder_robots/core/widgets/kid_widgets.dart';
 import 'package:little_builder_robots/core/widgets/robot_painter.dart';
+import 'package:little_builder_robots/core/widgets/robot_show_off.dart';
 import 'package:little_builder_robots/domain/models/decal.dart';
 import 'package:little_builder_robots/domain/models/part.dart';
 import 'package:little_builder_robots/domain/rules/unlock_rules.dart';
@@ -55,6 +56,7 @@ class WorkshopScreen extends ConsumerStatefulWidget {
 class _WorkshopScreenState extends ConsumerState<WorkshopScreen> {
   WorkshopTab _tab = WorkshopTab.moves;
   int _snap = 0;
+  Trick _trick = Trick.spin;
   int _shake = 0;
   bool _yawn = false;
 
@@ -123,13 +125,13 @@ class _WorkshopScreenState extends ConsumerState<WorkshopScreen> {
     switch (rules.checkPart(profile, part)) {
       case BuyCheck.owned:
         controller.equip(part);
-        _equipped();
+        _equipped(trickFor(part.id));
       case BuyCheck.canBuy:
         final cost = (part.unlock as BoltsUnlock).cost;
         if (await confirmUnlock(context, part, cost) &&
             controller.buyPart(part)) {
           audio.sfx(Sfx.unlock);
-          _equipped();
+          _equipped(trickFor(part.id));
         }
       case BuyCheck.needMoreBolts:
         _needMoreBolts();
@@ -140,11 +142,15 @@ class _WorkshopScreenState extends ConsumerState<WorkshopScreen> {
     }
   }
 
-  void _equipped() {
-    // WRK-03: snap animation, sound and light haptic.
+  /// WRK-03: snap sound and light haptic, then the robot shows off what
+  /// the part does.
+  void _equipped([Trick trick = Trick.spin]) {
     ref.read(audioProvider).sfx(Sfx.snap);
     ref.read(hapticsProvider).light();
-    setState(() => _snap++);
+    setState(() {
+      _trick = trick;
+      _snap++;
+    });
     _advanceTutorial();
   }
 
@@ -239,13 +245,11 @@ class _WorkshopScreenState extends ConsumerState<WorkshopScreen> {
                   width: 200,
                   child: Column(
                     children: [
-                      _SnapRobot(
-                        snap: _snap,
-                        child: RobotView(
-                          config: profile.robot,
-                          size: 120,
-                          face: _yawn ? RobotFace.sleep : RobotFace.happy,
-                        ),
+                      RobotShowOff(
+                        config: profile.robot,
+                        trick: _trick,
+                        play: _snap,
+                        face: _yawn ? RobotFace.sleep : RobotFace.happy,
                       ),
                       const Spacer(),
                       Pulse(
@@ -496,34 +500,6 @@ class _Tabs extends StatelessWidget {
             ),
         ],
       ),
-    );
-  }
-}
-
-/// WRK-03: a quick squash-and-stretch when a part snaps on.
-class _SnapRobot extends StatelessWidget {
-  const _SnapRobot({required this.snap, required this.child});
-
-  final int snap;
-  final Widget child;
-
-  @override
-  Widget build(BuildContext context) {
-    if (MediaQuery.disableAnimationsOf(context) || snap == 0) return child;
-    return TweenAnimationBuilder<double>(
-      key: ValueKey(snap),
-      tween: Tween(begin: 0, end: 1),
-      duration: const Duration(milliseconds: 250),
-      curve: Curves.easeOut,
-      builder: (context, t, child) {
-        final squash = 1 + 0.12 * (1 - t) * (t < 0.5 ? -1 : 1);
-        return Transform.scale(
-          scaleX: 2 - squash,
-          scaleY: squash,
-          child: child,
-        );
-      },
-      child: child,
     );
   }
 }

@@ -187,7 +187,10 @@ void main() {
         await tester.tap(badges.at(i));
         await tester.pump(const Duration(milliseconds: 100));
       }
-      log.add('stickers ${c.read(profileProvider).stickerIds.length}/24');
+      log.add(
+        'stickers ${c.read(profileProvider).stickerIds.length}'
+        '/${testData.stickers.length}',
+      );
       await tapLabel(tester, l10n.buttonHome);
 
       // Grown-ups through the gate; flip every switch.

@@ -570,3 +570,214 @@ class _PulseState extends State<Pulse> with SingleTickerProviderStateMixin {
     child: widget.child,
   );
 }
+
+/// A one-off shower of confetti over the screen, for celebrations. It
+/// never blocks taps and is gone within [duration], under the 4 s limit
+/// (NFR-21). Nothing is shown with Reduce Motion (NFR-11).
+class ConfettiShower extends StatefulWidget {
+  const ConfettiShower({
+    this.duration = const Duration(milliseconds: 2800),
+    this.pieces = 70,
+    super.key,
+  });
+
+  final Duration duration;
+  final int pieces;
+
+  @override
+  State<ConfettiShower> createState() => _ConfettiShowerState();
+}
+
+class _ConfettiShowerState extends State<ConfettiShower>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _c = AnimationController(
+    vsync: this,
+    duration: widget.duration,
+  );
+  late final List<_Piece> _pieces;
+
+  @override
+  void initState() {
+    super.initState();
+    final random = Random(3);
+    const colours = [
+      AppColors.sunny,
+      AppColors.tangerine,
+      AppColors.mint,
+      AppColors.roboBlue,
+      AppColors.white,
+    ];
+    _pieces = [
+      for (var i = 0; i < widget.pieces; i++)
+        _Piece(
+          x: random.nextDouble(),
+          delay: random.nextDouble() * 0.35,
+          speed: 0.7 + random.nextDouble() * 0.6,
+          sway: random.nextDouble() * 2 * pi,
+          spin: (random.nextDouble() - 0.5) * 14,
+          size: 7 + random.nextDouble() * 7,
+          color: colours[i % colours.length],
+        ),
+    ];
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (!MediaQuery.disableAnimationsOf(context) && !_c.isAnimating) {
+      unawaited(_c.forward(from: 0));
+    }
+  }
+
+  @override
+  void dispose() {
+    _c.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    if (MediaQuery.disableAnimationsOf(context)) return const SizedBox();
+    return IgnorePointer(
+      child: AnimatedBuilder(
+        animation: _c,
+        builder: (context, _) => CustomPaint(
+          size: Size.infinite,
+          painter: _ConfettiPainter(_pieces, _c.value),
+        ),
+      ),
+    );
+  }
+}
+
+class _Piece {
+  const _Piece({
+    required this.x,
+    required this.delay,
+    required this.speed,
+    required this.sway,
+    required this.spin,
+    required this.size,
+    required this.color,
+  });
+
+  final double x;
+  final double delay;
+  final double speed;
+  final double sway;
+  final double spin;
+  final double size;
+  final Color color;
+}
+
+class _ConfettiPainter extends CustomPainter {
+  const _ConfettiPainter(this.pieces, this.t);
+
+  final List<_Piece> pieces;
+  final double t;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    for (final p in pieces) {
+      final local = ((t - p.delay) / (1 - p.delay)).clamp(0.0, 1.0);
+      if (local <= 0 || local >= 1) continue;
+      final y = -20 + local * p.speed * (size.height + 60);
+      final x = p.x * size.width + sin(local * 8 + p.sway) * 24;
+      final fade = local > 0.8 ? (1 - local) / 0.2 : 1.0;
+      canvas
+        ..save()
+        ..translate(x, y)
+        ..rotate(local * p.spin)
+        ..drawRect(
+          Rect.fromCenter(
+            center: Offset.zero,
+            width: p.size,
+            height: p.size * 0.55,
+          ),
+          Paint()..color = p.color.withValues(alpha: fade),
+        )
+        ..restore();
+    }
+  }
+
+  @override
+  bool shouldRepaint(_ConfettiPainter old) => old.t != t;
+}
+
+/// Draws a golden gear (RUN-16) centred on [c]. An unfound gear is an
+/// outline, so its state reads without colour (DES-10).
+void paintGear(
+  Canvas canvas,
+  Offset c,
+  double r, {
+  double angle = 0,
+  bool found = true,
+}) {
+  const teeth = 8;
+  final path = Path();
+  for (var i = 0; i < teeth * 2; i++) {
+    final a0 = angle + i * pi / teeth;
+    final a1 = angle + (i + 1) * pi / teeth;
+    final rr = i.isEven ? r : r * 0.78;
+    final p0 = c + Offset(cos(a0), sin(a0)) * rr;
+    final p1 = c + Offset(cos(a1), sin(a1)) * rr;
+    if (i == 0) path.moveTo(p0.dx, p0.dy);
+    path
+      ..lineTo(p0.dx, p0.dy)
+      ..lineTo(p1.dx, p1.dy);
+  }
+  path.close();
+  canvas
+    ..drawPath(path, Paint()..color = found ? AppColors.sunny : AppColors.white)
+    ..drawPath(
+      path,
+      Paint()
+        ..color = AppColors.navy
+        ..style = PaintingStyle.stroke
+        ..strokeWidth = max(1.5, r * 0.14)
+        ..strokeJoin = StrokeJoin.round,
+    )
+    ..drawCircle(
+      c,
+      r * 0.3,
+      Paint()..color = found ? AppColors.navy : AppColors.cloud,
+    );
+}
+
+/// A golden gear as a widget: filled when found, an outline when it is
+/// still hiding on that course.
+class GearBadge extends StatelessWidget {
+  const GearBadge({required this.found, this.size = 28, super.key});
+
+  final bool found;
+  final double size;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
+    return Semantics(
+      label: found ? l10n.gearFoundLabel : l10n.gearMissingLabel,
+      child: CustomPaint(
+        size: Size.square(size),
+        painter: _GearPainter(found: found),
+      ),
+    );
+  }
+}
+
+class _GearPainter extends CustomPainter {
+  const _GearPainter({required this.found});
+
+  final bool found;
+
+  @override
+  void paint(Canvas canvas, Size size) => paintGear(
+    canvas,
+    size.center(Offset.zero),
+    size.shortestSide / 2 - 1,
+    found: found,
+  );
+
+  @override
+  bool shouldRepaint(_GearPainter old) => old.found != found;
+}

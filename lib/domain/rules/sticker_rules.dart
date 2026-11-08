@@ -25,6 +25,7 @@ abstract final class Fact {
   static const hop = 'hop';
   static const hint = 'hint';
   static const testTrackLap = 'testTrackLap';
+  static const gear = 'gear';
 
   // In the Workshop.
   static const paint = 'paint';
@@ -87,6 +88,8 @@ class StickerRules {
           facts.add(Fact.ceiling);
         case GateOpenedEvent():
           facts.add(Fact.gate);
+        case GearFoundEvent():
+          facts.add(Fact.gear);
         case HappyHopEvent():
           facts.add(Fact.hop);
         default:

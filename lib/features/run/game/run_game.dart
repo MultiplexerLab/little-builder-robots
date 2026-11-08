@@ -8,7 +8,17 @@ import 'package:little_builder_robots/features/run/run_controller.dart';
 /// The Flame game for a run (SRS 7.1): it advances the controller every
 /// frame and renders its state. All rules live in the RunSimulator.
 class RunGame extends FlameGame {
-  RunGame(this.controller) : _painter = WorldPainter(controller);
+  RunGame(
+    this.controller, {
+    bool reduceMotion = false,
+    Map<String, String> lines = const {},
+    void Function(String key)? onSay,
+  }) : _painter = WorldPainter(
+         controller,
+         reduceMotion: reduceMotion,
+         lines: lines,
+         onSay: onSay,
+       );
 
   final RunController controller;
   final WorldPainter _painter;

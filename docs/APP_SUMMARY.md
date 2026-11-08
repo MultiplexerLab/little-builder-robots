@@ -9,21 +9,22 @@
 | What it is | An offline robot-building game for children aged 3 to 7 |
 | Platform | iOS, landscape (Flutter and Flame). Android also builds |
 | State | Feature-complete for v1.0 (build steps 1 to 16). Not yet run on an iPhone or the iOS simulator; that needs a Mac |
-| Quality | `flutter analyze`: no issues. `flutter test`: 401 tests pass. A scripted play-through clears all 15 courses through the real screens, and the real app runs in Chrome with no errors. A debug Android build compiles |
+| Quality | `flutter analyze`: no issues. `flutter test`: 435 tests pass. A scripted play-through clears all 15 courses through the real screens, and the real app runs in Chrome with no errors. A debug Android build compiles |
 | Size of the code | 68 Dart files (about 10,000 lines) in `lib`, 25 test files (about 3,600 lines) |
-| Content | 15 courses, 17 parts, 6 paints, 8 decals, 24 stickers, 9 Test Track sections, 186 text strings, 93 audio clips |
+| Content | 15 courses, 17 parts, 6 paints, 8 decals, 25 stickers, 9 Test Track sections, 227 text strings, 130 audio clips |
 | Privacy | No accounts, ads, analytics, tracking or network requests. Everything stays on the device |
 
 ## How the game plays
 
 1. **Build.** In the Workshop the child picks parts for 4 slots: Head, Body, Arms and Moves. Each part changes 5 stats (Speed, Climb, Jump, Weight, Fuel) or adds an ability (Jetpack, Grab bars, Blow leaves, Mudproof).
 2. **Test.** The robot runs a course by itself. Each obstacle shows the stat it needs as an icon with pips. For example, steps show the Climb icon with 2 pips.
-3. **Learn from failing.** There are no lives and no losing. A failed obstacle sends the robot back to the last checkpoint, and repeated failures climb a hint ladder:
-   - first, the robot shrugs;
-   - next, a voiced hint names what's needed;
-   - then a wrench bubble suggests a part that would work.
+3. **Learn from failing.** There are no lives and no losing. A failed obstacle sends the robot back to the last checkpoint, and the game checks whether the robot's parts could ever pass it:
+   - **They can't:** the robot shrugs once, then a wrench bubble offers a part that would work. Little Builder gets the bubble straight away.
+   - **They can:** the child just mistimed a jump, so they get a timing tip ("Tap jump right at the edge!") instead.
+   - **Big Builder hints describe the problem** ("Those steps are too tall for this robot!") so the child works out the answer; Little Builder hints name it.
 4. **Swap mid-run.** Pit stops let the child change parts during a course.
-5. **Earn.** Stars, bolts (the in-game currency), new parts and stickers.
+5. **Earn and explore.** Stars, bolts (the in-game currency), new parts and stickers. Each course also hides a **golden gear**, often out of reach until the child comes back with a new part.
+6. **Personality.** Equipping a part makes the robot show it off (Wheels zoom, Spring feet boing, the Jetpack lifts off). In runs it shouts voiced exclamations ("Wheee!", "Boing!", "Hooray!"), and the run is full of feedback: sparkles, dust, splashes and confetti.
 
 There are two play styles, chosen by a grown-up on first launch:
 
@@ -43,32 +44,32 @@ There are two play styles, chosen by a grown-up on first launch:
 | Pause | Resume, Restart and Workshop as large buttons. Map, Home and Sound as 64 pt buttons. Bolts shown as icons. Leaving early keeps collected bolts | RUN-08, RES-03 |
 | Result | Stars with rule icons, +N bolts, part and sticker reveals, then Next, Rebuild and Play again. Course 15 adds a celebration | RES-01 to RES-06 |
 | Test Track | Endless loop of every obstacle type met so far, each followed by a pit stop. No stars or bolts | TRK-01 to TRK-04 |
-| Sticker book | 24 stickers earned for discoveries, never for skill or time. Silhouettes play a voiced clue when tapped | STK-01 to STK-04 |
+| Sticker book | 25 stickers earned for discoveries, never for skill or time. Silhouettes play a voiced clue when tapped | STK-01 to STK-04 |
 | Parent gate | Multiplication question written in words, with a number pad. Guards Grown-ups and every link | PAR-01 to PAR-03 |
 | Grown-ups | Play style, music, sound effects, voice and vibration switches, a daily time limit, a progress summary, the "what your child is learning" and Guided Access cards, privacy and support links, and reset with two confirms | PAR-04 to PAR-12 |
 | Rest time | When today's limit is reached (after the current run finishes), the robot falls asleep. A grown-up can add 10 more minutes or turn the limit off | PAR-07, PAR-11 |
 
 ## Courses (World 1, Gear Garden)
 
-| # | Teaches | Intended build | Pit stops | Reward |
-|---|---|---|---|---|
-| 1 | Rolling and collecting bolts | Any | – | 5 bolts |
-| 2 | Steps | Legs | – | 5 bolts |
-| 3 | Small gaps (tap to jump) | Any | – | Spring feet |
-| 4 | Steps, then timed gates | Legs, then Wheels | 1 | 8 bolts |
-| 5 | Bigger gaps | Spring feet | – | 8 bolts |
-| 6 | Ramp jumps | Wheels | – | Jetpack |
-| 7 | Wide gaps, low ceilings | Jetpack | – | 10 bolts |
-| 8 | Steps and gaps | Legs, or Legs then Spring feet | 1 | 10 bolts |
-| 9 | Mud | Light frame | – | Heavy frame |
-| 10 | Heavy switches | Heavy frame | – | 12 bolts |
-| 11 | Switch, then mud | Heavy frame, then Light frame | 1 | Grabber arms |
-| 12 | Bar swings | Grabber arms | – | 12 bolts |
-| 13 | Leaf piles | Jetpack (or Fan arms) | – | 15 bolts |
-| 14 | Mixed | Legs, then Spring feet, then Heavy frame | 2 | 15 bolts |
-| 15 | Finale: every obstacle type | Four stages | 3 | Gold head and celebration |
+| # | Teach, twist, payoff | Intended build | Pit stops | Reward | Golden gear needs |
+|---|---|---|---|---|---|
+| 1 | Roll and collect bolts | Any | – | 5 bolts | Spring feet |
+| 2 | One step, two steps, a tall staircase | Legs | – | 5 bolts | Legs (a first discovery) |
+| 3 | A gap, a double gap, a splash gap | Any | – | Spring feet | Spring feet |
+| 4 | Steps, then two timed gates | Legs, then Wheels | 1 | 8 bolts | Spring feet |
+| 5 | Big gaps with bolt arcs | Spring feet | – | 8 bolts | Jetpack |
+| 6 | A hop, then two ramp jumps | Wheels | – | Jetpack | Jetpack |
+| 7 | Wide gaps, one under a low roof | Jetpack | – | 10 bolts | Jetpack (a first discovery) |
+| 8 | Steps and a hop, then longer gaps | Legs, or Legs then Spring feet | 1 | 10 bolts | Spring feet |
+| 9 | Mud, then mud with gaps | Light frame | – | Heavy frame | Spring feet |
+| 10 | Heavy switches with a hop | Heavy frame | – | 12 bolts | Spring feet + Heavy frame |
+| 11 | Switches, then mud | Heavy frame, then Light frame | 1 | Grabber arms | Spring feet |
+| 12 | One bar, two bars, a hop | Grabber arms | – | 12 bolts | Spring feet + Grabber arms |
+| 13 | Leaf piles and a gap | Jetpack (or Fan arms) | – | 15 bolts | Jetpack, or Spring feet + Fan arms |
+| 14 | Steps, gaps, switches | Legs, Spring feet, Heavy frame | 2 | 15 bolts | Spring feet + Heavy frame |
+| 15 | Finale: every obstacle type | Four stages | 3 | Gold head and celebration | Spring feet + Heavy frame + Grabber arms |
 
-Every course is checked automatically by the solver test. It can be finished with parts the child already owns when it unlocks, without buying anything. Each intended build earns 3 stars in 20 to 40 seconds. Little Builder mode never changes which builds can finish.
+Every course is checked automatically by the solver test. It can be finished with parts the child already owns when it unlocks, without buying anything. Each intended build earns 3 stars in 15 to 25 seconds, and every golden gear can be reached by some combination of parts. The courses are generated by `tool/courses/make_courses.py`. Little Builder mode never changes which builds can finish.
 
 ## How it is built
 
@@ -91,7 +92,7 @@ Every course is checked automatically by the solver test. It can be finished wit
 
 **Packages:** flutter_riverpod, go_router, flame, hive_ce and hive_ce_flutter, audioplayers, url_launcher, freezed and json_serializable, and intl. None of them do analytics, ads or tracking. `audioplayers` includes the `http` package for streaming, but the app only plays bundled files.
 
-## Tests (401, all passing)
+## Tests (435, all passing)
 
 | Area | What is covered |
 |---|---|
@@ -116,7 +117,7 @@ These checks found and fixed four real problems: Workshop part tiles drew the wh
 ## Audio and art
 
 - **Music (4 loops) and sound effects (18):** original sounds, generated by code in `tool/audio/synth.py`. Free to ship.
-- **Voice-over (71 lines):** placeholder text-to-speech in a US English voice (Microsoft Zira). Replace it with a recorded British English voice before release; the file names are listed in [AUDIO_CLIPS.md](AUDIO_CLIPS.md). Rebuild all audio with `python tool/audio/build_audio.py`.
+- **Voice-over (108 lines):** placeholder text-to-speech in a US English voice (Microsoft Zira). Replace it with a recorded British English voice before release; the file names are listed in [AUDIO_CLIPS.md](AUDIO_CLIPS.md). Rebuild all audio with `python tool/audio/build_audio.py`.
 - **Art:** the robot, obstacles, map and stickers are drawn in code with the design-system colours. The app icon is rendered from the robot art with `python tool/app_icon/write_icons.py`.
 
 ## What is left before release

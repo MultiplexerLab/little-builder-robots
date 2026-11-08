@@ -28,10 +28,11 @@ void main() {
     });
 
     test('a ramp and its gap ask for speed', () {
-      final ramp = coach.needFor(courses[6]!, 0);
+      // Course 6: a hop (0), then a ramp (1) and its gap (2).
+      final ramp = coach.needFor(courses[6]!, 1);
       expect(ramp.need, Need.speed);
       expect(ramp.pips, 4);
-      expect(coach.needFor(courses[6]!, 1), ramp);
+      expect(coach.needFor(courses[6]!, 2), ramp);
     });
 
     test('switches, mud, bars, leaves', () {

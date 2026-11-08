@@ -4,22 +4,99 @@
   "index": 4,
   "hintKey": "hintCourse4",
   "rewardBolts": 8,
-  "lengthPx": 6000,
-  "checkpoints": [{ "x": 0 }, { "x": 1700 }, { "x": 2600, "pitStop": true }, { "x": 4200 }],
+  "lengthPx": 4700,
+  "checkpoints": [
+    {
+      "x": 0
+    },
+    {
+      "x": 1250
+    },
+    {
+      "x": 1900,
+      "pitStop": true
+    },
+    {
+      "x": 3200
+    }
+  ],
   "bolts": [
-    { "x": 500, "y": 24 },
-    { "x": 1100, "y": 72 },
-    { "x": 1500, "y": 120 },
-    { "x": 2050, "y": 72 },
-    { "x": 3000, "y": 24 },
-    { "x": 3600, "y": 24 },
-    { "x": 5000, "y": 24 }
+    {
+      "x": 680,
+      "y": 72
+    },
+    {
+      "x": 900,
+      "y": 120
+    },
+    {
+      "x": 1400,
+      "y": 72
+    },
+    {
+      "x": 2500,
+      "y": 24
+    },
+    {
+      "x": 2700,
+      "y": 24
+    },
+    {
+      "x": 3700,
+      "y": 24
+    },
+    {
+      "x": 4450,
+      "y": 24
+    }
   ],
+  "gear": {
+    "x": 2080,
+    "y": 200
+  },
   "obstacles": [
-    { "type": "steps", "x": 1000, "stepWidth": 160, "stepHeights": [48, 48], "topWidth": 300 },
-    { "type": "steps", "x": 1900, "stepWidth": 160, "stepHeights": [48], "topWidth": 200 },
-    { "type": "timedGate", "plateX": 3200, "x": 3900, "openSeconds": 3.1 },
-    { "type": "timedGate", "plateX": 4600, "x": 5300, "openSeconds": 3.1 }
+    {
+      "type": "steps",
+      "x": 600,
+      "stepWidth": 160,
+      "stepHeights": [
+        48,
+        48
+      ],
+      "topWidth": 250
+    },
+    {
+      "type": "steps",
+      "x": 1350,
+      "stepWidth": 160,
+      "stepHeights": [
+        48
+      ],
+      "topWidth": 150
+    },
+    {
+      "type": "timedGate",
+      "plateX": 2300,
+      "x": 3050,
+      "openSeconds": 3.2
+    },
+    {
+      "type": "timedGate",
+      "plateX": 3450,
+      "x": 4200,
+      "openSeconds": 3.2
+    }
   ],
-  "intendedBuilds": [{ "parts": ["moves_legs"], "pitStops": [["moves_wheels"]] }]
+  "intendedBuilds": [
+    {
+      "parts": [
+        "moves_legs"
+      ],
+      "pitStops": [
+        [
+          "moves_wheels"
+        ]
+      ]
+    }
+  ]
 }

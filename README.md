@@ -6,7 +6,7 @@ tests it on obstacle courses where each obstacle is beaten by a stat or
 ability. The full spec is [docs/SRS.md](docs/SRS.md); requirement IDs
 (WRK-03, RUN-11, ...) are the source of truth.
 
-**Status:** feature-complete for v1.0 and tested (401 tests, a full scripted
+**Status:** feature-complete for v1.0 and tested (435 tests, a full scripted
 play-through of all 15 courses, and a live run in Chrome with no errors). Not
 yet built for iPhone, which needs a Mac. See
 [docs/APP_SUMMARY.md](docs/APP_SUMMARY.md) for the full picture.
@@ -65,7 +65,7 @@ finished with the parts owned when it unlocks, that each intended build earns
 
 - **Art.** The robot, obstacles and sticker badges are drawn in code. The
   app icon is rendered from the same robot art (`tool/app_icon/`).
-- **Voice-over.** All 93 clips exist (`docs/AUDIO_CLIPS.md`): synthesised
+- **Voice-over.** All 130 clips exist (`docs/AUDIO_CLIPS.md`): synthesised
   music and effects, plus placeholder text-to-speech voice lines in a US
   voice. Record an en_GB voice before release.
 - **Mac-only steps.** Run on the iOS simulator and devices and check 60 fps

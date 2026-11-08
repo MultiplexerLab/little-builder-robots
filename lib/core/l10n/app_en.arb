@@ -1,11 +1,13 @@
 {
   "@@locale": "en",
   "appTitle": "Little Builder Robots",
-  "@appTitle": {"description": "App name, shown on Splash and Home."},
-
+  "@appTitle": {
+    "description": "App name, shown on Splash and Home."
+  },
   "screenResult": "You did it!",
-  "@screenResult": {"description": "Result title. Voiced (screenResult)."},
-
+  "@screenResult": {
+    "description": "Result title. Voiced (screenResult)."
+  },
   "buttonPlay": "Play",
   "buttonCourses": "Courses",
   "buttonHome": "Home",
@@ -30,28 +32,98 @@
   "buttonTryItOn": "Try it on",
   "buttonClose": "Close",
   "buttonCancel": "Cancel",
-
   "robotLabel": "Your robot",
   "jumpLabel": "Jump",
   "boltsLabel": "{count} bolts",
-  "@boltsLabel": {"placeholders": {"count": {"type": "int"}}},
+  "@boltsLabel": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "boltsOfLabel": "{collected} of {total} bolts",
-  "@boltsOfLabel": {"placeholders": {"collected": {"type": "int"}, "total": {"type": "int"}}},
+  "@boltsOfLabel": {
+    "placeholders": {
+      "collected": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
   "boltsGainedLabel": "{count} more bolts",
-  "@boltsGainedLabel": {"placeholders": {"count": {"type": "int"}}},
+  "@boltsGainedLabel": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "starsLabel": "{stars} of {total} stars",
-  "@starsLabel": {"placeholders": {"stars": {"type": "int"}, "total": {"type": "int"}}},
+  "@starsLabel": {
+    "placeholders": {
+      "stars": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
   "courseLabel": "Course {number}",
-  "@courseLabel": {"placeholders": {"number": {"type": "int"}}},
+  "@courseLabel": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
   "courseNodeLabel": "Course {number}, {stars} stars",
-  "@courseNodeLabel": {"placeholders": {"number": {"type": "int"}, "stars": {"type": "int"}}},
+  "@courseNodeLabel": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      },
+      "stars": {
+        "type": "int"
+      }
+    }
+  },
   "progressLabel": "{percent} percent of the way",
-  "@progressLabel": {"placeholders": {"percent": {"type": "int"}}},
+  "@progressLabel": {
+    "placeholders": {
+      "percent": {
+        "type": "int"
+      }
+    }
+  },
   "statLabel": "{stat}: {value} of 5",
-  "@statLabel": {"placeholders": {"stat": {"type": "String"}, "value": {"type": "int"}}},
+  "@statLabel": {
+    "placeholders": {
+      "stat": {
+        "type": "String"
+      },
+      "value": {
+        "type": "int"
+      }
+    }
+  },
   "statChangeLabel": "{stat}: {before} to {after}",
-  "@statChangeLabel": {"placeholders": {"stat": {"type": "String"}, "before": {"type": "int"}, "after": {"type": "int"}}},
-
+  "@statChangeLabel": {
+    "placeholders": {
+      "stat": {
+        "type": "String"
+      },
+      "before": {
+        "type": "int"
+      },
+      "after": {
+        "type": "int"
+      }
+    }
+  },
   "statSpeed": "Speed",
   "statClimb": "Climb",
   "statJump": "Jump",
@@ -61,14 +133,30 @@
   "abilityGrab": "Grab bars",
   "abilityFan": "Blow leaves",
   "abilityMudproof": "Mudproof",
-
   "tabLabel": "{tab, select, head{Head} body{Body} arms{Arms} moves{Moves} paint{Paint} decal{Stickers} other{Parts}}",
-  "@tabLabel": {"placeholders": {"tab": {"type": "String"}}},
+  "@tabLabel": {
+    "placeholders": {
+      "tab": {
+        "type": "String"
+      }
+    }
+  },
   "paintLabel": "{paint, select, sunny{Sunny yellow} roboBlue{Robo blue, stripes} tangerine{Orange, dots} mint{Mint, zigzags} grass{Green, checks} cloud{Cloud white, rings} other{Paint}}",
-  "@paintLabel": {"placeholders": {"paint": {"type": "String"}}},
+  "@paintLabel": {
+    "placeholders": {
+      "paint": {
+        "type": "String"
+      }
+    }
+  },
   "decalLabel": "{decal, select, decal_stars{Stars} decal_stripes{Stripes} decal_lightning{Lightning} decal_dots{Dots} decal_flowers{Flowers} decal_hearts{Hearts} decal_eyes{Eyes} decal_gears{Gears} other{Decal}}",
-  "@decalLabel": {"placeholders": {"decal": {"type": "String"}}},
-
+  "@decalLabel": {
+    "placeholders": {
+      "decal": {
+        "type": "String"
+      }
+    }
+  },
   "partWheels": "Wheels",
   "partLegs": "Legs",
   "partSpringFeet": "Spring feet",
@@ -86,21 +174,20 @@
   "partHeadTv": "TV head",
   "partHeadAntenna": "Antenna head",
   "partHeadGold": "Gold head",
-
   "firstRunTitle": "For grown-ups",
   "firstRunQuestion": "Who is playing?",
-  "@firstRunQuestion": {"description": "Voiced (firstRunQuestion)."},
+  "@firstRunQuestion": {
+    "description": "Voiced (firstRunQuestion)."
+  },
   "playStyleLittle": "Little Builder",
   "playStyleLittleAges": "Ages 3 to 4",
   "playStyleBig": "Big Builder",
   "playStyleBigAges": "Ages 5 to 7",
   "firstRunNote": "You can change this later in Grown-ups settings. Nothing else is stored.",
-
   "homeGreeting": "Let's build!",
   "homeIdlePlay": "Tap Play to build your robot!",
   "testTrackLocked": "Finish course 3 to open the Test Track!",
   "testTrackHint": "Try your robot on every kind of obstacle!",
-
   "goodAtSpeed": "Zoom! Your robot is fast.",
   "goodAtClimb": "Your robot can climb tall steps.",
   "goodAtJump": "Boing! Your robot jumps high.",
@@ -116,39 +203,81 @@
   "tutorialTapJump": "Tap here to jump!",
   "pitStopHint": "Pit stop! Swap a part, then tap Go.",
   "tryNewParts": "Try new parts?",
-
+  "sayWhee": "Wheee!",
+  "@sayWhee": {
+    "description": "The robot shouts this flying off a ramp. Voiced."
+  },
+  "sayBoing": "Boing!",
+  "@sayBoing": {
+    "description": "The robot bumps into something the first time. Voiced."
+  },
+  "saySplash": "Splash!",
+  "sayWhoops": "Whoops!",
+  "sayWhoosh": "Whoosh!",
+  "saySwing": "Swing!",
+  "sayClunk": "Clunk!",
+  "sayZoom": "Zoom zoom!",
+  "sayHooray": "Hooray!",
+  "sayYum": "Yum, bolts!",
+  "hintJumpTiming": "Tap jump right at the edge!",
+  "hintFlyTiming": "Hold to fly up, let go to float down!",
+  "sayGear": "A golden gear!",
+  "stickerClueGear": "Find a golden gear. Some hide up high!",
+  "gearLabel": "Golden gear",
+  "gearFoundLabel": "Golden gear found",
+  "gearMissingLabel": "A golden gear is hiding here",
   "hintSpeed": "Too slow! Try faster parts.",
+  "hintSpeedPuzzle": "That gate closes too fast for this robot!",
   "hintClimb": "These steps are tall! Try legs that climb.",
+  "hintClimbPuzzle": "Those steps are too tall for this robot!",
   "hintJump": "What a gap! Try parts that jump.",
+  "hintJumpPuzzle": "That gap is too wide to jump!",
   "hintHeavy": "This switch needs a heavy robot!",
+  "hintHeavyPuzzle": "This switch needs a heavier robot!",
   "hintLight": "Too heavy for the mud! Try a lighter body.",
+  "hintLightPuzzle": "This robot is too heavy for the mud!",
   "hintJetpack": "Too far to jump! Try the Jetpack.",
+  "hintJetpackPuzzle": "Too far for any jump!",
   "hintGrab": "Grab the bar! Try Grabber arms.",
+  "hintGrabPuzzle": "Too far to jump. Look, a bar to hold!",
   "hintFan": "Leaves in the way! Try Fan arms or fly over.",
-
+  "hintFanPuzzle": "Those leaves are in the way!",
   "hintCourse1": "Roll along and collect the bolts!",
+  "hintCourse1Puzzle": "Roll along and grab every bolt!",
   "hintCourse2": "Steps ahead! Legs are good at climbing.",
-  "hintCourse3": "Little gaps! Tap to jump over them.",
+  "hintCourse2Puzzle": "Steps ahead, and they get taller!",
+  "hintCourse3": "Little gaps! Jump over them.",
+  "hintCourse3Puzzle": "Gaps ahead! Can your robot hop over?",
   "hintCourse4": "Climb the steps, then swap to something fast at the pit stop.",
+  "hintCourse4Puzzle": "Steps first, then gates that close fast!",
   "hintCourse5": "Big gaps! Springy feet jump far.",
+  "hintCourse5Puzzle": "These gaps are big. Who can jump that far?",
   "hintCourse6": "Zoom up the ramp and fly over the gap!",
-  "hintCourse7": "Huge gaps and a low roof. Fly carefully!",
-  "hintCourse8": "Steps and gaps. Climb first, then jump.",
+  "hintCourse6Puzzle": "Ramps! Go fast to fly off them.",
+  "hintCourse7": "Huge gaps and a low roof. Fly with the Jetpack!",
+  "hintCourse7Puzzle": "Gaps too wide to jump, and a low roof!",
+  "hintCourse8": "Climb first, then try springy feet at the pit stop!",
+  "hintCourse8Puzzle": "Steps, then gaps that get longer.",
   "hintCourse9": "Sticky mud! Stay light.",
-  "hintCourse10": "Press the big switch with a heavy robot.",
-  "hintCourse11": "Heavy for the switch, then light for the mud.",
-  "hintCourse12": "Swing across on the bars!",
+  "hintCourse9Puzzle": "Sticky mud! Heavy robots sink.",
+  "hintCourse10": "Press the big switches with a heavy robot.",
+  "hintCourse10Puzzle": "Big switches! They need lots of weight.",
+  "hintCourse11": "Heavy for the switches, then light for the mud.",
+  "hintCourse11Puzzle": "Big switches, then sticky mud!",
+  "hintCourse12": "Swing across on the bars with grabber arms!",
+  "hintCourse12Puzzle": "Wide gaps with bars over them!",
   "hintCourse13": "Leaf piles! Blow them away or fly over.",
+  "hintCourse13Puzzle": "Tall leaf piles block the way!",
   "hintCourse14": "Steps, gaps and switches. Use the pit stops!",
+  "hintCourse14Puzzle": "Steps, gaps and switches! Plan your pit stops.",
   "hintCourse15": "The big finale! Everything at once.",
-
+  "hintCourse15Puzzle": "The big finale! Everything at once.",
   "starFinish": "Finished",
   "starAllBolts": "All the bolts",
   "starNoFalls": "No splashes",
   "newPartTitle": "New part!",
   "newStickerTitle": "New sticker!",
   "celebration": "You finished Gear Garden!",
-
   "stickerLocked": "A sticker to find",
   "stickerClueJump": "Make your robot jump!",
   "stickerClueBolt": "Pick up a bolt.",
@@ -174,18 +303,31 @@
   "stickerClueThreeStars": "Get 3 stars on a course.",
   "stickerClueGoldHead": "Wear the Gold head.",
   "stickerClueWorld1": "Finish all of Gear Garden.",
-
   "gateTitle": "For grown-ups",
   "gateExplanation": "This keeps settings and links away from little fingers.",
   "gateQuestion": "What is {a} multiplied by {b}?",
-  "@gateQuestion": {"placeholders": {"a": {"type": "String"}, "b": {"type": "String"}}},
+  "@gateQuestion": {
+    "placeholders": {
+      "a": {
+        "type": "String"
+      },
+      "b": {
+        "type": "String"
+      }
+    }
+  },
   "numberWord": "{n, select, 3{three} 4{four} 5{five} 6{six} 7{seven} 8{eight} 9{nine} other{?}}",
-  "@numberWord": {"placeholders": {"n": {"type": "String"}}},
+  "@numberWord": {
+    "placeholders": {
+      "n": {
+        "type": "String"
+      }
+    }
+  },
   "gateAnswerLabel": "Your answer",
   "gateWrong": "Not quite. Here is a new question.",
   "gateDone": "Done",
   "gateDelete": "Delete",
-
   "grownUpsTitle": "Grown-ups",
   "grownUpsPrivacyHeader": "No data leaves this device. There are no ads, no accounts and no tracking.",
   "playStyleTitle": "Play style",
@@ -202,12 +344,45 @@
   "dailyLimitHelp": "When time is up, the current run finishes first, then the robot goes to sleep until tomorrow.",
   "limitOff": "Off",
   "limitMinutes": "{minutes} min",
-  "@limitMinutes": {"placeholders": {"minutes": {"type": "int"}}},
+  "@limitMinutes": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
   "progressTitle": "Progress",
   "progressSummary": "Courses done: {done} of {courses}. Stars: {stars} of {maxStars}. Stickers: {stickers} of {maxStickers}.",
-  "@progressSummary": {"placeholders": {"done": {"type": "int"}, "courses": {"type": "int"}, "stars": {"type": "int"}, "maxStars": {"type": "int"}, "stickers": {"type": "int"}, "maxStickers": {"type": "int"}}},
+  "@progressSummary": {
+    "placeholders": {
+      "done": {
+        "type": "int"
+      },
+      "courses": {
+        "type": "int"
+      },
+      "stars": {
+        "type": "int"
+      },
+      "maxStars": {
+        "type": "int"
+      },
+      "stickers": {
+        "type": "int"
+      },
+      "maxStickers": {
+        "type": "int"
+      }
+    }
+  },
   "playTimeWeek": "Play time in the last 7 days: {minutes} minutes",
-  "@playTimeWeek": {"placeholders": {"minutes": {"type": "int"}}},
+  "@playTimeWeek": {
+    "placeholders": {
+      "minutes": {
+        "type": "int"
+      }
+    }
+  },
   "learningTitle": "What your child is learning",
   "learningBody": "Cause and effect: each part changes what the robot can do. Planning: choosing parts before a course. Trying again: there are no lives, and every failure gives a hint. Early problem-solving: matching the right part to each obstacle.",
   "guidedAccessTitle": "Keep a young child in the app",
@@ -219,7 +394,6 @@
   "resetAction": "Reset",
   "resetSureTitle": "Are you sure?",
   "resetSureBody": "This cannot be undone.",
-
   "restMessage": "Time to rest! The robot is recharging.",
   "restMoreTime": "10 more minutes",
   "restTurnOff": "Turn off limit"

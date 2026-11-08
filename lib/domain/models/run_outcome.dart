@@ -12,5 +12,8 @@ abstract class RunOutcome with _$RunOutcome {
 
     /// Falls into gaps or water. Bumps are not counted (RES-02, SRS 4.4).
     required int falls,
+
+    /// The golden gear was picked up (RUN-16). Not part of the stars.
+    @Default(false) bool foundGear,
   }) = _RunOutcome;
 }

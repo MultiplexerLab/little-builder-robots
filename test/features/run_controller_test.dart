@@ -45,8 +45,8 @@ void main() {
   }
 
   group('RUN-13 hint ladder', () {
-    test('Big Builder: shrug, then voiced hint, then the wrench bubble', () {
-      // Wheels can't climb course 2's steps.
+    test('parts that cannot pass: a shrug, then straight to new parts', () {
+      // Wheels can't climb course 2's steps, so retrying is pointless.
       final c = controller(courses[2]!);
       final steps = <int>[];
       for (var i = 0; i < 3; i++) {
@@ -54,15 +54,29 @@ void main() {
         steps.add(c.hint!.step);
         run(c, 3, until: () => c.state.phase == RunPhase.running);
       }
-      expect(steps, [1, 2, 3]);
+      expect(steps, [1, 3, 3]);
       expect(c.hint!.need, (need: Need.climb, pips: 2));
       expect(c.hint!.suggestion?.id, 'moves_legs');
     });
 
-    test('Little Builder skips the shrug', () {
+    test('Little Builder gets new parts at the first bump', () {
       final c = controller(courses[2]!, style: PlayStyle.little);
       run(c, 40, until: () => c.state.phase == RunPhase.bumped);
-      expect(c.hint!.step, 2);
+      expect(c.hint!.step, 3);
+      expect(c.hint!.suggestion?.id, 'moves_legs');
+    });
+
+    test('parts that can pass: a timing tip, never a push for new parts', () {
+      // Wheels can jump course 3's gaps; without a tap the robot falls.
+      final c = controller(courses[3]!);
+      final steps = <int>[];
+      for (var i = 0; i < 3; i++) {
+        run(c, 30, until: () => c.state.phase == RunPhase.fallen);
+        steps.add(c.hint!.step);
+        expect(c.hint!.timing, i > 0);
+        run(c, 3, until: () => c.state.phase == RunPhase.running);
+      }
+      expect(steps, [1, 2, 2]);
     });
 
     test('tapping elsewhere dismisses the bubble', () {
