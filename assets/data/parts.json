@@ -1,0 +1,144 @@
+{
+  "baseStats": { "speed": 2, "climb": 0, "jump": 0, "weight": 0, "fuel": 0 },
+  "statMax": 5,
+  "defaultRobot": {
+    "headId": "head_round",
+    "bodyId": "body_light_frame",
+    "armsId": "arms_short",
+    "movesId": "moves_wheels",
+    "colour": "sunny"
+  },
+  "parts": [
+    {
+      "id": "moves_wheels",
+      "slot": "moves",
+      "nameKey": "partWheels",
+      "spriteAsset": "assets/images/parts/moves_wheels.png",
+      "mods": { "speed": 2 },
+      "unlock": { "type": "start" }
+    },
+    {
+      "id": "moves_legs",
+      "slot": "moves",
+      "nameKey": "partLegs",
+      "spriteAsset": "assets/images/parts/moves_legs.png",
+      "mods": { "climb": 3 },
+      "unlock": { "type": "start" }
+    },
+    {
+      "id": "moves_spring_feet",
+      "slot": "moves",
+      "nameKey": "partSpringFeet",
+      "spriteAsset": "assets/images/parts/moves_spring_feet.png",
+      "mods": { "jump": 3, "speed": 1 },
+      "unlock": { "type": "reward", "courseId": "w1_c03" }
+    },
+    {
+      "id": "moves_jetpack",
+      "slot": "moves",
+      "nameKey": "partJetpack",
+      "spriteAsset": "assets/images/parts/moves_jetpack.png",
+      "mods": { "speed": 1, "fuel": 3, "weight": -1 },
+      "ability": "jetpack",
+      "unlock": { "type": "reward", "courseId": "w1_c06" }
+    },
+    {
+      "id": "moves_tank_tracks",
+      "slot": "moves",
+      "nameKey": "partTankTracks",
+      "spriteAsset": "assets/images/parts/moves_tank_tracks.png",
+      "mods": { "climb": 2, "weight": 2, "speed": 1 },
+      "ability": "mudproof",
+      "unlock": { "type": "bolts", "cost": 40 }
+    },
+    {
+      "id": "body_light_frame",
+      "slot": "body",
+      "nameKey": "partLightFrame",
+      "spriteAsset": "assets/images/parts/body_light_frame.png",
+      "mods": { "weight": 1 },
+      "unlock": { "type": "start" }
+    },
+    {
+      "id": "body_heavy_frame",
+      "slot": "body",
+      "nameKey": "partHeavyFrame",
+      "spriteAsset": "assets/images/parts/body_heavy_frame.png",
+      "mods": { "weight": 4, "speed": -1 },
+      "unlock": { "type": "reward", "courseId": "w1_c09" }
+    },
+    {
+      "id": "body_battery",
+      "slot": "body",
+      "nameKey": "partBatteryBody",
+      "spriteAsset": "assets/images/parts/body_battery.png",
+      "mods": { "weight": 1, "fuel": 2 },
+      "unlock": { "type": "bolts", "cost": 30 }
+    },
+    {
+      "id": "arms_short",
+      "slot": "arms",
+      "nameKey": "partShortArms",
+      "spriteAsset": "assets/images/parts/arms_short.png",
+      "unlock": { "type": "start" }
+    },
+    {
+      "id": "arms_grabber",
+      "slot": "arms",
+      "nameKey": "partGrabberArms",
+      "spriteAsset": "assets/images/parts/arms_grabber.png",
+      "ability": "grab",
+      "unlock": { "type": "reward", "courseId": "w1_c11" }
+    },
+    {
+      "id": "arms_fan",
+      "slot": "arms",
+      "nameKey": "partFanArms",
+      "spriteAsset": "assets/images/parts/arms_fan.png",
+      "ability": "fan",
+      "unlock": { "type": "bolts", "cost": 35 }
+    },
+    {
+      "id": "head_round",
+      "slot": "head",
+      "nameKey": "partHeadRound",
+      "spriteAsset": "assets/images/parts/head_round.png",
+      "unlock": { "type": "start" }
+    },
+    {
+      "id": "head_square",
+      "slot": "head",
+      "nameKey": "partHeadSquare",
+      "spriteAsset": "assets/images/parts/head_square.png",
+      "unlock": { "type": "start" }
+    },
+    {
+      "id": "head_dome",
+      "slot": "head",
+      "nameKey": "partHeadDome",
+      "spriteAsset": "assets/images/parts/head_dome.png",
+      "unlock": { "type": "bolts", "cost": 20 }
+    },
+    {
+      "id": "head_tv",
+      "slot": "head",
+      "nameKey": "partHeadTv",
+      "spriteAsset": "assets/images/parts/head_tv.png",
+      "unlock": { "type": "bolts", "cost": 20 }
+    },
+    {
+      "id": "head_antenna",
+      "slot": "head",
+      "nameKey": "partHeadAntenna",
+      "spriteAsset": "assets/images/parts/head_antenna.png",
+      "unlock": { "type": "bolts", "cost": 20 }
+    },
+    {
+      "id": "head_gold",
+      "slot": "head",
+      "nameKey": "partHeadGold",
+      "spriteAsset": "assets/images/parts/head_gold.png",
+      "unlock": { "type": "reward", "courseId": "w1_c15" }
+    }
+  ]
+}

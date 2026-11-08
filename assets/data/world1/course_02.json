@@ -1,0 +1,23 @@
+{
+  "id": "w1_c02",
+  "world": 1,
+  "index": 2,
+  "hintKey": "hintCourse2",
+  "rewardBolts": 5,
+  "lengthPx": 5000,
+  "checkpoints": [{ "x": 0 }, { "x": 2300 }, { "x": 3600 }],
+  "bolts": [
+    { "x": 600, "y": 24 },
+    { "x": 1300, "y": 72 },
+    { "x": 1700, "y": 120 },
+    { "x": 3100, "y": 168 },
+    { "x": 4100, "y": 72 },
+    { "x": 4700, "y": 24 }
+  ],
+  "obstacles": [
+    { "type": "steps", "x": 1200, "stepWidth": 160, "stepHeights": [48, 48], "topWidth": 400 },
+    { "type": "steps", "x": 2600, "stepWidth": 160, "stepHeights": [48, 48, 48], "topWidth": 300 },
+    { "type": "steps", "x": 3900, "stepWidth": 160, "stepHeights": [48], "topWidth": 300 }
+  ],
+  "intendedBuilds": [{ "parts": ["moves_legs"] }]
+}

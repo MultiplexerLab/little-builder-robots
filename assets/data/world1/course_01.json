@@ -1,0 +1,18 @@
+{
+  "id": "w1_c01",
+  "world": 1,
+  "index": 1,
+  "hintKey": "hintCourse1",
+  "rewardBolts": 5,
+  "lengthPx": 6000,
+  "checkpoints": [{ "x": 0 }, { "x": 3000 }],
+  "bolts": [
+    { "x": 800, "y": 24 },
+    { "x": 1800, "y": 24 },
+    { "x": 2800, "y": 24 },
+    { "x": 3800, "y": 24 },
+    { "x": 4800, "y": 24 }
+  ],
+  "obstacles": [],
+  "intendedBuilds": [{}, { "parts": ["moves_legs"] }]
+}

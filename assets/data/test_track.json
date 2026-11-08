@@ -1,0 +1,122 @@
+{
+  "leadIn": 400,
+  "sections": [
+    {
+      "type": "steps",
+      "length": 900,
+      "obstacles": [
+        {
+          "type": "steps",
+          "x": 200,
+          "stepWidth": 160,
+          "stepHeights": [
+            48,
+            48
+          ],
+          "topWidth": 200
+        }
+      ]
+    },
+    {
+      "type": "gap",
+      "length": 700,
+      "obstacles": [
+        {
+          "type": "gap",
+          "x": 300,
+          "width": 140
+        }
+      ]
+    },
+    {
+      "type": "timedGate",
+      "length": 1100,
+      "obstacles": [
+        {
+          "type": "timedGate",
+          "plateX": 200,
+          "x": 800,
+          "openSeconds": 2.6
+        }
+      ]
+    },
+    {
+      "type": "ramp",
+      "length": 900,
+      "obstacles": [
+        {
+          "type": "ramp",
+          "x": 200,
+          "width": 200
+        },
+        {
+          "type": "gap",
+          "x": 400,
+          "width": 280
+        }
+      ]
+    },
+    {
+      "type": "lowCeiling",
+      "length": 1100,
+      "obstacles": [
+        {
+          "type": "lowCeiling",
+          "x": 200,
+          "width": 700,
+          "height": 200
+        },
+        {
+          "type": "gap",
+          "x": 350,
+          "width": 400
+        }
+      ]
+    },
+    {
+      "type": "mud",
+      "length": 900,
+      "obstacles": [
+        {
+          "type": "mud",
+          "x": 200,
+          "width": 500
+        }
+      ]
+    },
+    {
+      "type": "heavySwitch",
+      "length": 900,
+      "obstacles": [
+        {
+          "type": "heavySwitch",
+          "plateX": 200,
+          "x": 600
+        }
+      ]
+    },
+    {
+      "type": "barGap",
+      "length": 900,
+      "obstacles": [
+        {
+          "type": "barGap",
+          "x": 250,
+          "width": 400
+        }
+      ]
+    },
+    {
+      "type": "leafPile",
+      "length": 700,
+      "obstacles": [
+        {
+          "type": "leafPile",
+          "x": 350,
+          "width": 60,
+          "height": 170
+        }
+      ]
+    }
+  ]
+}

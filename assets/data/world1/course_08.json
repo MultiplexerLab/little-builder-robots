@@ -1,0 +1,123 @@
+{
+  "id": "w1_c08",
+  "world": 1,
+  "index": 8,
+  "hintKey": "hintCourse8",
+  "rewardBolts": 10,
+  "lengthPx": 6000,
+  "checkpoints": [
+    {
+      "x": 0
+    },
+    {
+      "x": 1400
+    },
+    {
+      "x": 2600
+    },
+    {
+      "x": 3000,
+      "pitStop": true
+    },
+    {
+      "x": 4800
+    }
+  ],
+  "bolts": [
+    {
+      "x": 500,
+      "y": 24
+    },
+    {
+      "x": 900,
+      "y": 72
+    },
+    {
+      "x": 1200,
+      "y": 120
+    },
+    {
+      "x": 1750,
+      "y": 60
+    },
+    {
+      "x": 2200,
+      "y": 72
+    },
+    {
+      "x": 3670,
+      "y": 70
+    },
+    {
+      "x": 4470,
+      "y": 70
+    },
+    {
+      "x": 5270,
+      "y": 70
+    },
+    {
+      "x": 5700,
+      "y": 24
+    }
+  ],
+  "obstacles": [
+    {
+      "type": "steps",
+      "x": 800,
+      "stepWidth": 160,
+      "stepHeights": [
+        48,
+        48
+      ],
+      "topWidth": 200
+    },
+    {
+      "type": "gap",
+      "x": 1700,
+      "width": 100
+    },
+    {
+      "type": "steps",
+      "x": 2100,
+      "stepWidth": 160,
+      "stepHeights": [
+        48
+      ],
+      "topWidth": 200
+    },
+    {
+      "type": "gap",
+      "x": 3600,
+      "width": 140
+    },
+    {
+      "type": "gap",
+      "x": 4400,
+      "width": 140,
+      "water": true
+    },
+    {
+      "type": "gap",
+      "x": 5200,
+      "width": 140
+    }
+  ],
+  "intendedBuilds": [
+    {
+      "parts": [
+        "moves_legs"
+      ]
+    },
+    {
+      "parts": [
+        "moves_legs"
+      ],
+      "pitStops": [
+        [
+          "moves_spring_feet"
+        ]
+      ]
+    }
+  ]
+}

@@ -1,0 +1,113 @@
+{
+  "id": "w1_c13",
+  "world": 1,
+  "index": 13,
+  "hintKey": "hintCourse13",
+  "rewardBolts": 15,
+  "lengthPx": 6500,
+  "checkpoints": [
+    {
+      "x": 0
+    },
+    {
+      "x": 1500
+    },
+    {
+      "x": 2500
+    },
+    {
+      "x": 3500
+    },
+    {
+      "x": 4500
+    },
+    {
+      "x": 5500
+    }
+  ],
+  "bolts": [
+    {
+      "x": 600,
+      "y": 24
+    },
+    {
+      "x": 1030,
+      "y": 200
+    },
+    {
+      "x": 1300,
+      "y": 24
+    },
+    {
+      "x": 2030,
+      "y": 200
+    },
+    {
+      "x": 2300,
+      "y": 24
+    },
+    {
+      "x": 3030,
+      "y": 200
+    },
+    {
+      "x": 3300,
+      "y": 24
+    },
+    {
+      "x": 4030,
+      "y": 200
+    },
+    {
+      "x": 4300,
+      "y": 24
+    },
+    {
+      "x": 5030,
+      "y": 200
+    },
+    {
+      "x": 6000,
+      "y": 24
+    }
+  ],
+  "obstacles": [
+    {
+      "type": "leafPile",
+      "x": 1000,
+      "width": 60,
+      "height": 170
+    },
+    {
+      "type": "leafPile",
+      "x": 2000,
+      "width": 60,
+      "height": 170
+    },
+    {
+      "type": "leafPile",
+      "x": 3000,
+      "width": 60,
+      "height": 170
+    },
+    {
+      "type": "leafPile",
+      "x": 4000,
+      "width": 60,
+      "height": 170
+    },
+    {
+      "type": "leafPile",
+      "x": 5000,
+      "width": 60,
+      "height": 170
+    }
+  ],
+  "intendedBuilds": [
+    {
+      "parts": [
+        "moves_jetpack"
+      ]
+    }
+  ]
+}

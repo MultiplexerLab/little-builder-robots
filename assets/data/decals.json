@@ -1,0 +1,12 @@
+{
+  "decals": [
+    { "id": "decal_stars", "spriteAsset": "assets/images/decals/stars.png", "cost": 0 },
+    { "id": "decal_stripes", "spriteAsset": "assets/images/decals/stripes.png", "cost": 0 },
+    { "id": "decal_lightning", "spriteAsset": "assets/images/decals/lightning.png", "cost": 15 },
+    { "id": "decal_dots", "spriteAsset": "assets/images/decals/dots.png", "cost": 15 },
+    { "id": "decal_flowers", "spriteAsset": "assets/images/decals/flowers.png", "cost": 20 },
+    { "id": "decal_hearts", "spriteAsset": "assets/images/decals/hearts.png", "cost": 20 },
+    { "id": "decal_eyes", "spriteAsset": "assets/images/decals/eyes.png", "cost": 30 },
+    { "id": "decal_gears", "spriteAsset": "assets/images/decals/gears.png", "cost": 30 }
+  ]
+}

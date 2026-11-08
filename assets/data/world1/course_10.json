@@ -1,0 +1,85 @@
+{
+  "id": "w1_c10",
+  "world": 1,
+  "index": 10,
+  "hintKey": "hintCourse10",
+  "rewardBolts": 12,
+  "lengthPx": 6500,
+  "checkpoints": [
+    {
+      "x": 0
+    },
+    {
+      "x": 2200
+    },
+    {
+      "x": 4200
+    }
+  ],
+  "bolts": [
+    {
+      "x": 500,
+      "y": 24
+    },
+    {
+      "x": 1000,
+      "y": 24
+    },
+    {
+      "x": 1450,
+      "y": 24
+    },
+    {
+      "x": 2000,
+      "y": 24
+    },
+    {
+      "x": 2800,
+      "y": 24
+    },
+    {
+      "x": 3350,
+      "y": 24
+    },
+    {
+      "x": 3900,
+      "y": 24
+    },
+    {
+      "x": 4700,
+      "y": 24
+    },
+    {
+      "x": 5050,
+      "y": 24
+    },
+    {
+      "x": 6000,
+      "y": 24
+    }
+  ],
+  "obstacles": [
+    {
+      "type": "heavySwitch",
+      "plateX": 1400,
+      "x": 1800
+    },
+    {
+      "type": "heavySwitch",
+      "plateX": 3300,
+      "x": 3700
+    },
+    {
+      "type": "heavySwitch",
+      "plateX": 5000,
+      "x": 5400
+    }
+  ],
+  "intendedBuilds": [
+    {
+      "parts": [
+        "body_heavy_frame"
+      ]
+    }
+  ]
+}

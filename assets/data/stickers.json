@@ -1,0 +1,148 @@
+{
+  "stickers": [
+    {
+      "id": "sticker_jump",
+      "iconAsset": "assets/images/stickers/jump.png",
+      "clueKey": "stickerClueJump",
+      "rule": "jump"
+    },
+    {
+      "id": "sticker_bolt",
+      "iconAsset": "assets/images/stickers/bolt.png",
+      "clueKey": "stickerClueBolt",
+      "rule": "bolt"
+    },
+    {
+      "id": "sticker_splash",
+      "iconAsset": "assets/images/stickers/splash.png",
+      "clueKey": "stickerClueSplash",
+      "rule": "splash"
+    },
+    {
+      "id": "sticker_boing",
+      "iconAsset": "assets/images/stickers/boing.png",
+      "clueKey": "stickerClueBoing",
+      "rule": "boing"
+    },
+    {
+      "id": "sticker_mud",
+      "iconAsset": "assets/images/stickers/mud.png",
+      "clueKey": "stickerClueMud",
+      "rule": "mud"
+    },
+    {
+      "id": "sticker_jetpack",
+      "iconAsset": "assets/images/stickers/jetpack.png",
+      "clueKey": "stickerClueJetpack",
+      "rule": "jetpack"
+    },
+    {
+      "id": "sticker_switch",
+      "iconAsset": "assets/images/stickers/switch.png",
+      "clueKey": "stickerClueSwitch",
+      "rule": "switch"
+    },
+    {
+      "id": "sticker_swing",
+      "iconAsset": "assets/images/stickers/swing.png",
+      "clueKey": "stickerClueSwing",
+      "rule": "swing"
+    },
+    {
+      "id": "sticker_leaves",
+      "iconAsset": "assets/images/stickers/leaves.png",
+      "clueKey": "stickerClueLeaves",
+      "rule": "leaves"
+    },
+    {
+      "id": "sticker_ramp",
+      "iconAsset": "assets/images/stickers/ramp.png",
+      "clueKey": "stickerClueRamp",
+      "rule": "ramp"
+    },
+    {
+      "id": "sticker_ceiling",
+      "iconAsset": "assets/images/stickers/ceiling.png",
+      "clueKey": "stickerClueCeiling",
+      "rule": "ceiling"
+    },
+    {
+      "id": "sticker_gate",
+      "iconAsset": "assets/images/stickers/gate.png",
+      "clueKey": "stickerClueGate",
+      "rule": "gate"
+    },
+    {
+      "id": "sticker_pitStop",
+      "iconAsset": "assets/images/stickers/pitStop.png",
+      "clueKey": "stickerCluePitStop",
+      "rule": "pitStop"
+    },
+    {
+      "id": "sticker_hop",
+      "iconAsset": "assets/images/stickers/hop.png",
+      "clueKey": "stickerClueHop",
+      "rule": "hop"
+    },
+    {
+      "id": "sticker_hint",
+      "iconAsset": "assets/images/stickers/hint.png",
+      "clueKey": "stickerClueHint",
+      "rule": "hint"
+    },
+    {
+      "id": "sticker_paint",
+      "iconAsset": "assets/images/stickers/paint.png",
+      "clueKey": "stickerCluePaint",
+      "rule": "paint"
+    },
+    {
+      "id": "sticker_decal",
+      "iconAsset": "assets/images/stickers/decal.png",
+      "clueKey": "stickerClueDecal",
+      "rule": "decal"
+    },
+    {
+      "id": "sticker_headSwap",
+      "iconAsset": "assets/images/stickers/headSwap.png",
+      "clueKey": "stickerClueHeadSwap",
+      "rule": "headSwap"
+    },
+    {
+      "id": "sticker_newPart",
+      "iconAsset": "assets/images/stickers/newPart.png",
+      "clueKey": "stickerClueNewPart",
+      "rule": "newPart"
+    },
+    {
+      "id": "sticker_testTrackLap",
+      "iconAsset": "assets/images/stickers/testTrackLap.png",
+      "clueKey": "stickerClueTestTrackLap",
+      "rule": "testTrackLap"
+    },
+    {
+      "id": "sticker_allMoves",
+      "iconAsset": "assets/images/stickers/allMoves.png",
+      "clueKey": "stickerClueAllMoves",
+      "rule": "allMoves"
+    },
+    {
+      "id": "sticker_threeStars",
+      "iconAsset": "assets/images/stickers/threeStars.png",
+      "clueKey": "stickerClueThreeStars",
+      "rule": "threeStars"
+    },
+    {
+      "id": "sticker_goldHead",
+      "iconAsset": "assets/images/stickers/goldHead.png",
+      "clueKey": "stickerClueGoldHead",
+      "rule": "goldHead"
+    },
+    {
+      "id": "sticker_world1",
+      "iconAsset": "assets/images/stickers/world1.png",
+      "clueKey": "stickerClueWorld1",
+      "rule": "world1"
+    }
+  ]
+}
